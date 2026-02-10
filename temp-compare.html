@@ -1,177 +1,272 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Phase Change Periodic Table</title>
+  <title>Phase Change Periodic Table · Tungsten · Silicon · Radon</title>
   <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --accent: #58a6ff;
+      --tungsten: #4a6a8a;
+      --silicon: #7c3aed;
+      --radon: #e11d48;
+      --title-blue-gray: #7a92ad;
+      --tagline-blue-gray: #94a3b8;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
     body {
+      background: var(--bg);
+      color: var(--text);
       font-family: system-ui, sans-serif;
-      background: #0d1117;
-      color: #e6edf3;
-      margin: 0;
-      padding: 2rem 1rem;
+      line-height: 1.6;
       min-height: 100vh;
     }
 
-    h1 {
-      text-align: center;
-      color: #7a92ad;
-      margin-bottom: 0.8rem;
+    nav {
+      position: fixed;
+      top: 1rem;
+      right: 2rem;
+      z-index: 100;
+      display: flex;
+      gap: 1.5rem;
     }
 
-    .intro {
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--accent); }
+
+    header.hero {
       text-align: center;
-      color: #94a3b8;
-      margin-bottom: 1.5rem;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-      font-size: 0.95rem;
+      padding: 7rem 1rem 3rem;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 9vw, 5rem);
+      margin-bottom: 1rem;
+      color: var(--title-blue-gray);
+      letter-spacing: -0.02em;
+    }
+
+    .tagline {
+      font-size: 1.25rem;
+      color: var(--tagline-blue-gray);
+      max-width: 720px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.5;
     }
 
     .slider-container {
       max-width: 900px;
-      margin: 0 auto 2rem;
+      margin: 0 auto 3rem;
       text-align: center;
+      padding: 0 1.5rem;
+    }
+
+    label[for="temp-slider"] {
+      display: block;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    #current-temp {
+      color: var(--accent);
+      font-weight: 600;
     }
 
     input[type="range"] {
       width: 100%;
-      height: 12px;
+      height: 10px;
       background: #30363d;
-      border-radius: 6px;
+      border-radius: 5px;
       outline: none;
       appearance: none;
     }
 
     input[type="range"]::-webkit-slider-thumb {
       appearance: none;
-      width: 24px;
-      height: 24px;
-      background: #58a6ff;
+      width: 22px;
+      height: 22px;
+      background: var(--accent);
       border-radius: 50%;
       cursor: pointer;
-      border: 2px solid #0d1117;
+      border: 3px solid var(--bg);
+      box-shadow: 0 0 10px rgba(88,166,255,0.4);
     }
 
-    #current-temp {
-      font-size: 1.6rem;
-      font-weight: bold;
-      margin: 0.8rem 0;
-      color: #58a6ff;
+    input[type="range"]::-moz-range-thumb {
+      width: 22px;
+      height: 22px;
+      background: var(--accent);
+      border-radius: 50%;
+      cursor: pointer;
+      border: 3px solid var(--bg);
+      box-shadow: 0 0 10px rgba(88,166,255,0.4);
     }
 
     .periodic-table {
       display: grid;
-      grid-template-columns: repeat(18, 56px);
-      grid-auto-rows: 56px;
-      gap: 4px;
-      max-width: 1200px;
+      grid-template-columns: repeat(18, minmax(60px, 1fr));
+      grid-auto-rows: 70px;
+      gap: 6px;
+      max-width: 1280px;
       margin: 0 auto;
+      padding: 0 1.5rem;
       justify-content: center;
     }
 
     .element {
-      background: #161b22;
+      background: var(--surface);
       border: 1px solid #30363d;
-      border-radius: 6px;
+      border-radius: 10px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       position: relative;
-      transition: all 0.2s ease;
+      transition: all 0.22s ease;
       cursor: pointer;
+      overflow: hidden;
+    }
+
+    .element:hover,
+    .element:focus {
+      transform: translateY(-8px) scale(1.06);
+      border-color: var(--accent);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.45);
+      z-index: 2;
     }
 
     .element.empty {
       background: transparent;
       border: none;
       pointer-events: none;
+      box-shadow: none;
     }
 
     .element-symbol {
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       font-weight: bold;
+      letter-spacing: -0.5px;
     }
 
     .element-number {
-      font-size: 0.65rem;
-      color: #8b949e;
+      font-size: 0.75rem;
+      color: var(--text-muted);
       position: absolute;
-      top: 2px;
-      left: 3px;
+      top: 6px;
+      left: 8px;
     }
 
     .phase-label {
-      font-size: 0.7rem;
+      font-size: 0.78rem;
       font-weight: 600;
-      margin-top: 2px;
-      padding: 2px 6px;
-      border-radius: 4px;
-      min-width: 50px;
+      margin-top: 4px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      min-width: 54px;
       text-align: center;
+      color: white;
     }
 
-    .solid   { background: #4a6a8a !important; color: white; }
-    .liquid  { background: #d97706 !important; color: white; }
-    .gas     { background: #0891b2 !important; color: white; }
-    .unknown { background: #6b7280 !important; color: #e6edf3; font-style: italic; }
+    .solid   { background: #3a556e; }          /* darker tungsten-like */
+    .liquid  { background: #d97706; }          /* amber */
+    .gas     { background: #0e7490; }          /* deep cyan */
+    .unknown { background: #4b5563; color: #d1d5db; font-style: italic; }
 
     .focus {
-      border: 2.5px solid #58a6ff !important;
-      box-shadow: 0 0 14px rgba(88,166,255,0.7);
-      transform: scale(1.08);
-      z-index: 5;
+      border-color: var(--accent) !important;
+      box-shadow: 0 0 16px rgba(88,166,255,0.5);
+      background: rgba(88,166,255,0.08);
+    }
+
+    footer {
+      text-align: center;
+      padding: 4rem 1rem 2rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
     }
 
     @media (max-width: 1000px) {
-      .periodic-table { grid-template-columns: repeat(18, 44px); gap: 3px; }
-      .element-symbol { font-size: 1.15rem; }
-      .phase-label { font-size: 0.62rem; min-width: 42px; }
+      .periodic-table {
+        grid-template-columns: repeat(18, minmax(44px, 1fr));
+        grid-auto-rows: 58px;
+        gap: 4px;
+      }
+      .element-symbol { font-size: 1.25rem; }
+      .phase-label { font-size: 0.68rem; min-width: 46px; padding: 2px 6px; }
+      header.hero { padding-top: 5rem; }
+      nav { top: 0.8rem; right: 1rem; gap: 1rem; font-size: 0.95rem; }
+    }
+
+    @media (max-width: 600px) {
+      .periodic-table {
+        grid-template-columns: repeat(18, minmax(32px, 1fr));
+        grid-auto-rows: 48px;
+        gap: 3px;
+      }
+      .element-symbol { font-size: 1rem; }
+      .element-number { font-size: 0.6rem; top: 4px; left: 5px; }
     }
   </style>
 </head>
 <body>
 
-  <h1>Phase Change Periodic Table </h1>
-  <p class="intro">
-    Slide temperature (0–6000 K) to show elements form at that temp<br>
-    (No lanthanides/actinides.)<br>
-    Focus elements: Si (metalloid), Rn (nonmetal), W (metal) glow blue.<br>
-    
-  </p>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="tungsten.html">Tungsten</a>
+    <a href="silicon.html">Silicon</a>
+    <a href="radon.html">Radon</a>
+    <a href="compare.html">Compare</a>
+  </nav>
+
+  <header class="hero">
+    <h1>Phase Change Periodic Table</h1>
+    <p class="tagline">
+      Slide temperature (0–6000 K) to see the phase of each element<br>
+      Focus: Silicon (metalloid), Radon (noble gas), Tungsten (metal) glow with accent<br>
+      (Lanthanides and actinides omitted for clarity)
+    </p>
+  </header>
 
   <div class="slider-container">
-    <label for="temp-slider">Temperature: <span id="current-temp">0 K</span></label>
+    <label for="temp-slider">
+      Temperature: <span id="current-temp">0 K</span>
+    </label>
     <input type="range" id="temp-slider" min="0" max="6000" value="0" step="20">
   </div>
 
   <div class="periodic-table" id="table"></div>
 
-  <div class="references" style="text-align:center; margin-top:3rem; font-size:0.85rem; color:#8b949e;">
-    Data from RSC Periodic Table(accessed Feb 2026).  "?" shows unknown.
-  </div>
+  <footer>
+    <p>Data from RSC Periodic Table (accessed Feb 2026). "?" indicates unknown melting/boiling points for superheavy elements.</p>
+  </footer>
 
   <script>
     const elementsData = [
-      // Period 1
+      // (your original array – unchanged)
       {z:1, sym:'H', per:1, grp:1, melt:13.99, boil:20.28},
       {z:2, sym:'He', per:1, grp:18, melt:0.95, boil:4.22},
-      // Period 2
       {z:3, sym:'Li', per:2, grp:1, melt:453.7, boil:1615},
       {z:4, sym:'Be', per:2, grp:2, melt:1560, boil:2742},
       {z:5, sym:'B', per:2, grp:13, melt:2349, boil:4200},
-      // ───── Carbon fixed: melt set to very high value so liquid branch is never entered
-      // boil = sublimation temperature (solid → gas directly at ~3823 K at 1 atm)
       {z:6, sym:'C', per:2, grp:14, melt: 100000, boil: 3823},
       {z:7, sym:'N', per:2, grp:15, melt:63.23, boil:77.36},
       {z:8, sym:'O', per:2, grp:16, melt:54.36, boil:90.19},
       {z:9, sym:'F', per:2, grp:17, melt:53.48, boil:85},
       {z:10, sym:'Ne', per:2, grp:18, melt:24.56, boil:27.1},
-      // Period 3
       {z:11, sym:'Na', per:3, grp:1, melt:370.87, boil:1156},
       {z:12, sym:'Mg', per:3, grp:2, melt:923, boil:1363},
       {z:13, sym:'Al', per:3, grp:13, melt:933.47, boil:2792},
@@ -180,7 +275,6 @@
       {z:16, sym:'S', per:3, grp:16, melt:388, boil:717.8},
       {z:17, sym:'Cl', per:3, grp:17, melt:171.6, boil:239.11},
       {z:18, sym:'Ar', per:3, grp:18, melt:83.81, boil:87.3},
-      // Period 4 (d-block starts)
       {z:19, sym:'K', per:4, grp:1, melt:336.7, boil:1032},
       {z:20, sym:'Ca', per:4, grp:2, melt:1115, boil:1762},
       {z:21, sym:'Sc', per:4, grp:3, melt:1814, boil:3109},
@@ -199,7 +293,6 @@
       {z:34, sym:'Se', per:4, grp:16, melt:494, boil:958},
       {z:35, sym:'Br', per:4, grp:17, melt:265.8, boil:332},
       {z:36, sym:'Kr', per:4, grp:18, melt:115.78, boil:119.8},
-      // Period 5 (d-block)
       {z:37, sym:'Rb', per:5, grp:1, melt:312.46, boil:961},
       {z:38, sym:'Sr', per:5, grp:2, melt:1050, boil:1655},
       {z:39, sym:'Y', per:5, grp:3, melt:1799, boil:3609},
@@ -218,7 +311,6 @@
       {z:52, sym:'Te', per:5, grp:16, melt:722.66, boil:1261},
       {z:53, sym:'I', per:5, grp:17, melt:386.85, boil:457.4},
       {z:54, sym:'Xe', per:5, grp:18, melt:161.4, boil:165.1},
-      // Period 6 (d-block + gap for lanthanides)
       {z:55, sym:'Cs', per:6, grp:1, melt:301.7, boil:944},
       {z:56, sym:'Ba', per:6, grp:2, melt:999, boil:2174},
       {z:72, sym:'Hf', per:6, grp:4, melt:2506, boil:4876},
@@ -236,7 +328,6 @@
       {z:84, sym:'Po', per:6, grp:16, melt:527, boil:1235},
       {z:85, sym:'At', per:6, grp:17, melt:575, boil:610},
       {z:86, sym:'Rn', per:6, grp:18, melt:202, boil:211.5, focus:true},
-      // Period 7 (d-block + gap for actinides)
       {z:87, sym:'Fr', per:7, grp:1, melt:300, boil:950},
       {z:88, sym:'Ra', per:7, grp:2, melt:973, boil:2010},
       {z:104, sym:'Rf', per:7, grp:4, melt: null, boil:null},
@@ -260,7 +351,7 @@
     const tempDisplay = document.getElementById('current-temp');
     const slider = document.getElementById('temp-slider');
 
-    // Build 7 rows × 18 columns
+    // Build grid
     for (let per = 1; per <= 7; per++) {
       for (let grp = 1; grp <= 18; grp++) {
         const cell = document.createElement('div');
