@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bonding Comparator · Electron Shells</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --accent: #58a6ff;
+      --tungsten: #4a6a8a;
+      --silicon: #7c3aed;
+      --radon: #e11d48;
+      --title-blue-gray: #7a92ad;
+      --tagline-blue-gray: #94a3b8;
+      --border: #30363d;
+      
+      /* New electron status colors */
+      --electron-has: #ffd700;          /* Yellow - electrons atom has */
+      --electron-wants: #00ff88;        /* Green - electrons atom wants */
+      --electron-too-many: #ff6b6b;     /* Red - electrons atom wants to lose */
+      --electron-full: #9d4edd;         /* Purple - already full/stable */
+      --electron-empty: #8b949e;        /* Gray - empty positions */
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    nav {
+      position: fixed;
+      top: 1rem;
+      right: 2rem;
+      z-index: 100;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--accent); }
+
+    .legend {
+      position: fixed;
+      top: 4rem;
+      left: 2rem;
+      z-index: 100;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      max-width: 200px;
+    }
+
+    .legend h4 {
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+      font-size: 0.9rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    .color-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    header.hero {
+      text-align: center;
+      padding: 7rem 1rem 3rem;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 8vw, 4.2rem);
+      margin-bottom: 0.8rem;
+      color: var(--title-blue-gray);
+    }
+
+    .tagline {
+      font-size: 1.2rem;
+      color: var(--tagline-blue-gray);
+      max-width: 680px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .comparator {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .column {
+      flex: 1;
+      min-width: 280px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .column h2 {
+      text-align: center;
+      margin-bottom: 1.2rem;
+      color: var(--accent);
+    }
+
+    .option {
+      width: 100%;
+      padding: 1rem;
+      margin: 0.6rem 0;
+      background: rgba(88,166,255,0.08);
+      border: 2px solid transparent;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .option:hover {
+      background: rgba(88,166,255,0.15);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .option.selected {
+      border-color: var(--accent);
+      background: rgba(88,166,255,0.25);
+      box-shadow: 0 0 12px rgba(88,166,255,0.4);
+      transform: scale(1.02);
+    }
+
+    .W { color: var(--tungsten); }
+    .Si   { color: var(--silicon); }
+    .Rn     { color: var(--radon); }
+
+    #result {
+      flex: 1.5;
+      min-width: 340px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    #result.active {
+      border-color: var(--accent);
+      box-shadow: 0 8px 24px rgba(88,166,255,0.25);
+    }
+
+    #result-title {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    #delta-en {
+      font-size: 1.3rem;
+      margin: 1rem 0;
+      color: var(--text-muted);
+    }
+
+    #bond-type {
+      font-size: 2rem;
+      font-weight: bold;
+      margin: 1rem 0;
+      min-height: 2.5rem;
+    }
+
+    #explanation {
+      font-size: 1.1rem;
+      margin: 1.5rem 0;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .shell-container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin: 2rem 0;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .atom-shells {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      position: relative;
+    }
+
+    .shell-label {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      color: var(--accent);
+      font-size: 1.2rem;
+      text-align: center;
+    }
+
+    .shell-diagram {
+      width: 160px;
+      height: 160px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .shell-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 2px solid var(--text-muted);
+    }
+
+    .inner-shell {
+      width: 50px;
+      height: 50px;
+      border-color: var(--electron-full);
+    }
+
+    .outer-shell {
+      width: 120px;
+      height: 120px;
+      border-color: var(--text-muted);
+    }
+
+    .electron {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
+
+    .electron-has {
+      background: var(--electron-has);
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+
+    .electron-wants {
+      background: transparent;
+      border: 2px dashed var(--electron-wants);
+      animation: pulseWant 2s infinite;
+    }
+
+    @keyframes pulseWant {
+      0%, 100% { border-color: var(--electron-wants); }
+      50% { border-color: transparent; }
+    }
+
+    .electron-too-many {
+      background: var(--electron-too-many);
+      box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+      animation: pulseTooMany 1.5s infinite;
+    }
+
+    @keyframes pulseTooMany {
+      0%, 100% { transform: translate(-50%, -50%) scale(1); }
+      50% { transform: translate(-50%, -50%) scale(1.1); }
+    }
+
+    .electron-full {
+      background: var(--electron-full);
+      box-shadow: 0 0 12px rgba(157, 78, 221, 0.6);
+    }
+
+    .electron-empty {
+      background: transparent;
+      border: 1px solid var(--electron-empty);
+      opacity: 0.3;
+    }
+
+    .electron-count {
+      position: absolute;
+      top: 110%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1rem;
+      color: var(--text);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-weight: bold;
+      min-width: 100px;
+    }
+
+    .w-count {
+      background: rgba(255, 107, 107, 0.2);
+      border: 1px solid var(--electron-too-many);
+      color: var(--electron-too-many);
+    }
+
+    .si-count {
+      background: rgba(0, 255, 136, 0.2);
+      border: 1px solid var(--electron-wants);
+      color: var(--electron-wants);
+    }
+
+    .rn-count {
+      background: rgba(157, 78, 221, 0.2);
+      border: 1px solid var(--electron-full);
+      color: var(--electron-full);
+    }
+
+    .bond-status {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 140px;
+      padding: 1.5rem;
+      background: rgba(0,0,0,0.2);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .bond-status h4 {
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .status-icon {
+      font-size: 2.5rem;
+      margin: 0.5rem 0;
+      font-weight: bold;
+    }
+
+    .happy {
+      color: var(--electron-wants);
+    }
+
+    .needs-more {
+      color: var(--electron-wants);
+    }
+
+    .wants-less {
+      color: var(--electron-too-many);
+    }
+
+    .already-full {
+      color: var(--electron-full);
+    }
+
+    .shell-explanation {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: rgba(0,0,0,0.2);
+      border-radius: 10px;
+      text-align: left;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      border: 1px solid var(--border);
+    }
+
+    .shell-explanation h4 {
+      color: var(--accent);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .electron-summary {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .atom-summary {
+      padding: 1rem;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .atom-summary.w-summary {
+      background: rgba(255, 107, 107, 0.1);
+      border-left: 4px solid var(--electron-too-many);
+    }
+
+    .atom-summary.si-summary {
+      background: rgba(0, 255, 136, 0.1);
+      border-left: 4px solid var(--electron-wants);
+    }
+
+    .atom-summary.rn-summary {
+      background: rgba(157, 78, 221, 0.1);
+      border-left: 4px solid var(--electron-full);
+    }
+
+    .atom-summary h5 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .atom-summary h5::before {
+      content: '';
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .w-summary h5::before { background: var(--electron-too-many); }
+    .si-summary h5::before { background: var(--electron-wants); }
+    .rn-summary h5::before { background: var(--electron-full); }
+
+    .result-box {
+      background: rgba(88,166,255,0.1);
+      padding: 1.2rem;
+      border-radius: 8px;
+      margin-top: 1.5rem;
+      border-left: 4px solid var(--accent);
+    }
+
+    footer {
+      text-align: center;
+      padding: 4rem 1rem 2rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 900px) {
+      .comparator { flex-direction: column; }
+      header.hero { padding-top: 5.5rem; }
+      .legend { display: none; }
+      .shell-container {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .electron-summary {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="legend">
+    <h4>Electron Status Colors:</h4>
+    <div class="legend-item">
+      <div class="color-dot" style="background: var(--electron-has)"></div>
+      <span>Electron atom has</span>
+    </div>
+    <div class="legend-item">
+      <div class="color-dot" style="background: var(--electron-wants)"></div>
+      <span>Wants electron (needs)</span>
+    </div>
+    <div class="legend-item">
+      <div class="color-dot" style="background: var(--electron-too-many)"></div>
+      <span>Too many electrons</span>
+    </div>
+    <div class="legend-item">
+      <div class="color-dot" style="background: var(--electron-full)"></div>
+      <span>Full shell (stable)</span>
+    </div>
+    <div class="legend-item">
+      <div class="color-dot" style="border: 1px solid var(--electron-empty)"></div>
+      <span>Empty position</span>
+    </div>
+  </div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="tungsten.html">Tungsten</a>
+    <a href="silicon.html">Silicon</a>
+    <a href="radon.html">Radon</a>
+    <a href="compare.html">Compare</a>
+  </nav>
+
+  <header class="hero">
+    <h1>Bonding Comparator</h1>
+    <p class="tagline">
+      See how electron shells determine bonding behavior.
+    </p>
+  </header>
+
+  <div class="comparator">
+    <div class="column">
+      <h2>Element A</h2>
+      <div class="option W" data-sym="W" data-en="2.36" data-valence="6">Tungsten (W) – Metal</div>
+      <div class="option Si" data-sym="Si" data-en="1.90" data-valence="4">Silicon (Si) – Metalloid</div>
+      <div class="option Rn" data-sym="Rn" data-en="2.20" data-valence="8">Radon (Rn) – Noble Gas</div>
+    </div>
+
+    <div class="column">
+      <h2>Element B</h2>
+      <div class="option W" data-sym="W" data-en="2.36" data-valence="6">Tungsten (W) – Metal</div>
+      <div class="option Si" data-sym="Si" data-en="1.90" data-valence="4">Silicon (Si) – Metalloid</div>
+      <div class="option Rn" data-sym="Rn" data-en="2.20" data-valence="8">Radon (Rn) – Noble Gas</div>
+    </div>
+
+    <div id="result">
+      <div id="result-title">Select two elements</div>
+      <div id="delta-en"></div>
+      <div id="bond-type">—</div>
+      <div id="explanation">
+        Pick one from each column to see their electron shells and bonding behavior.
+      </div>
+      <div id="shell-display"></div>
+      <div id="shell-explanation"></div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Visualizing electron shell configurations and their effect on chemical bonding.</p>
+  </footer>
+
+  <script>
+    // DOM references
+    const leftColumn   = document.querySelector('.column:nth-child(1)');
+    const rightColumn  = document.querySelector('.column:nth-child(2)');
+    const leftOptions  = leftColumn.querySelectorAll('.option');
+    const rightOptions = rightColumn.querySelectorAll('.option');
+
+    const result       = document.getElementById('result');
+    const titleEl      = document.getElementById('result-title');
+    const deltaEl      = document.getElementById('delta-en');
+    const typeEl       = document.getElementById('bond-type');
+    const explEl       = document.getElementById('explanation');
+    const shellDisplay = document.getElementById('shell-display');
+    const shellExpl    = document.getElementById('shell-explanation');
+
+    let left  = null;
+    let right = null;
+
+    // Electron positions for 8 electrons around a circle
+    const electronPositions = [
+      [0.5, 0.15],   // Top
+      [0.82, 0.22],  // Top-right
+      [0.92, 0.5],   // Right
+      [0.82, 0.78],  // Bottom-right
+      [0.5, 0.88],   // Bottom
+      [0.18, 0.78],  // Bottom-left
+      [0.08, 0.5],   // Left
+      [0.18, 0.22]   // Top-left
+    ];
+
+    function clearHighlights() {
+      leftOptions.forEach(el => el.classList.remove('selected'));
+      rightOptions.forEach(el => el.classList.remove('selected'));
+    }
+
+    function createShellDiagram(symbol, valence) {
+      const totalElectrons = 8;
+      const diagram = document.createElement('div');
+      diagram.className = 'shell-diagram';
+      
+      // Create shells
+      const innerShell = document.createElement('div');
+      innerShell.className = 'shell-ring inner-shell';
+      
+      const outerShell = document.createElement('div');
+      outerShell.className = 'shell-ring outer-shell';
+      
+      diagram.appendChild(innerShell);
+      diagram.appendChild(outerShell);
+      
+      // Add nucleus symbol
+      const nucleus = document.createElement('div');
+      nucleus.className = 'nucleus';
+      nucleus.textContent = symbol;
+      nucleus.style.cssText = `
+        position: absolute;
+        font-weight: bold;
+        font-size: 1.8rem;
+        color: white;
+        z-index: 3;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+      `;
+      diagram.appendChild(nucleus);
+      
+      // Add inner shell electrons (always full - 2 electrons)
+      for (let i = 0; i < 2; i++) {
+        const electron = document.createElement('div');
+        electron.className = 'electron electron-full';
+        electron.style.cssText = `
+          top: ${50 + 20 * Math.cos(i * Math.PI)}%;
+          left: ${50 + 20 * Math.sin(i * Math.PI)}%;
+        `;
+        diagram.appendChild(electron);
+      }
+      
+      // Add outer shell electrons based on element type
+      for (let i = 0; i < totalElectrons; i++) {
+        const [x, y] = electronPositions[i];
+        const electron = document.createElement('div');
+        
+        if (i < valence) {
+          // Has electron
+          if (symbol === 'W') {
+            electron.className = 'electron electron-too-many';
+          } else if (symbol === 'Rn') {
+            electron.className = 'electron electron-full';
+          } else { // Si
+            electron.className = 'electron electron-has';
+          }
+        } else {
+          // Empty position or wants electron
+          if (symbol === 'Si' && i < 8) {
+            electron.className = 'electron electron-wants';
+          } else {
+            electron.className = 'electron electron-empty';
+          }
+        }
+        
+        electron.style.cssText = `
+          top: ${y * 100}%;
+          left: ${x * 100}%;
+        `;
+        diagram.appendChild(electron);
+      }
+      
+      // Add electron count label with appropriate color
+      const count = document.createElement('div');
+      count.className = 'electron-count';
+      if (symbol === 'W') count.classList.add('w-count');
+      else if (symbol === 'Si') count.classList.add('si-count');
+      else if (symbol === 'Rn') count.classList.add('rn-count');
+      
+      let statusText = '';
+      if (symbol === 'W') statusText = '6/8 (Too many!)';
+      else if (symbol === 'Si') statusText = '4/8 (Needs 4)';
+      else statusText = '8/8 (Full!)';
+      
+      count.textContent = statusText;
+      diagram.appendChild(count);
+      
+      return diagram;
+    }
+
+    function getShellStatus(symbol, valence) {
+      switch(symbol) {
+        case 'W': // Tungsten: 6 electrons
+          return {
+            status: 'WANTS TO LOSE',
+            description: 'Has 6 valence electrons - wants to LOSE 2+ to be stable',
+            icon: '↓',
+            className: 'wants-less',
+            colorClass: 'electron-too-many'
+          };
+        case 'Si': // Silicon: 4 electrons
+          return {
+            status: 'NEEDS TO SHARE',
+            description: 'Has 4 valence electrons - needs 4 MORE to complete shell',
+            icon: '⇄',
+            className: 'needs-more',
+            colorClass: 'electron-wants'
+          };
+        case 'Rn': // Radon: 8 electrons
+          return {
+            status: 'ALREADY STABLE',
+            description: 'Has full 8 valence electrons - ALREADY STABLE',
+            icon: '✓',
+            className: 'already-full',
+            colorClass: 'electron-full'
+          };
+      }
+    }
+
+    function update() {
+      clearHighlights();
+
+      if (left) {
+        leftColumn.querySelector(`[data-sym="${left.sym}"]`).classList.add('selected');
+      }
+      if (right) {
+        rightColumn.querySelector(`[data-sym="${right.sym}"]`).classList.add('selected');
+      }
+
+      if (left && right) {
+        const d = Math.abs(left.en - right.en).toFixed(2);
+
+        titleEl.textContent = `${left.sym} + ${right.sym}`;
+        deltaEl.textContent = `Electronegativity Difference: ΔEN = ${d}`;
+
+        let bond = '';
+        let reason = '';
+        
+        const leftStatus = getShellStatus(left.sym, left.valence);
+        const rightStatus = getShellStatus(right.sym, right.valence);
+
+        // Clear previous display
+        shellDisplay.innerHTML = '';
+        shellExpl.innerHTML = '';
+
+        // Create shell comparison container
+        const container = document.createElement('div');
+        container.className = 'shell-container';
+        
+        // Left atom shells
+        const leftContainer = document.createElement('div');
+        leftContainer.className = 'atom-shells';
+        leftContainer.innerHTML = `
+          <div class="shell-label">${left.sym}</div>
+          <div class="bond-status">
+            <h4>Electron Status</h4>
+            <div class="status-icon ${leftStatus.className}" style="color: var(${leftStatus.colorClass})">
+              ${leftStatus.icon}
+            </div>
+            <div style="color: var(${leftStatus.colorClass}); font-weight: bold">
+              ${leftStatus.status}
+            </div>
+          </div>
+        `;
+        leftContainer.appendChild(createShellDiagram(left.sym, left.valence));
+        
+        // Bond status in middle
+        const middleContainer = document.createElement('div');
+        middleContainer.className = 'bond-status';
+        
+        if (left.sym === 'Rn' || right.sym === 'Rn') {
+          bond = 'No Bond / Inert';
+          reason = 'Radon has a full electron shell and is already stable. It won\'t bond.';
+          middleContainer.innerHTML = `
+            <h4>Bond Result</h4>
+            <div class="status-icon already-full" style="color: var(--electron-full)">✖</div>
+            <div style="color: var(--electron-full); font-weight: bold">NO BOND</div>
+          `;
+        } else if (left.sym === right.sym) {
+          if (left.sym === 'W') {
+            bond = 'Metallic Bond';
+            reason = 'Both metals have too many electrons. They create a shared "electron sea".';
+            middleContainer.innerHTML = `
+              <h4>Bond Result</h4>
+              <div class="status-icon wants-less" style="color: var(--electron-too-many)">M</div>
+              <div style="color: var(--electron-too-many); font-weight: bold">ELECTRON SEA</div>
+            `;
+          } else {
+            bond = 'Covalent Network';
+            reason = 'Both need electrons, so they share perfectly to complete their shells.';
+            middleContainer.innerHTML = `
+              <h4>Bond Result</h4>
+              <div class="status-icon needs-more" style="color: var(--electron-wants)">⇄</div>
+              <div style="color: var(--electron-wants); font-weight: bold">PERFECT SHARE</div>
+            `;
+          }
+        } else {
+          if (d < 0.5) {
+            bond = 'Polar Covalent';
+            reason = 'Similar electron needs create nearly equal sharing.';
+            middleContainer.innerHTML = `
+              <h4>Bond Result</h4>
+              <div class="status-icon needs-more" style="color: var(--electron-wants)">⇄</div>
+              <div style="color: var(--electron-wants); font-weight: bold">UNEQUAL SHARE</div>
+            `;
+          } else if (d <= 1.7) {
+            bond = 'Polar Covalent';
+            reason = 'Electrons are shared but spend more time near the more electronegative atom.';
+            middleContainer.innerHTML = `
+              <h4>Bond Result</h4>
+              <div class="status-icon needs-more" style="color: var(--electron-wants)">±</div>
+              <div style="color: var(--electron-wants); font-weight: bold">POLAR SHARE</div>
+            `;
+          } else {
+            bond = 'Ionic Tendency';
+            reason = 'Electron transfer from metal (electron donor) to non-metal (electron acceptor).';
+            middleContainer.innerHTML = `
+              <h4>Bond Result</h4>
+              <div class="status-icon wants-less" style="color: var(--electron-too-many)">→</div>
+              <div style="color: var(--electron-too-many); font-weight: bold">TRANSFER</div>
+            `;
+          }
+        }
+
+        // Right atom shells
+        const rightContainer = document.createElement('div');
+        rightContainer.className = 'atom-shells';
+        rightContainer.innerHTML = `
+          <div class="shell-label">${right.sym}</div>
+          <div class="bond-status">
+            <h4>Electron Status</h4>
+            <div class="status-icon ${rightStatus.className}" style="color: var(${rightStatus.colorClass})">
+              ${rightStatus.icon}
+            </div>
+            <div style="color: var(${rightStatus.colorClass}); font-weight: bold">
+              ${rightStatus.status}
+            </div>
+          </div>
+        `;
+        rightContainer.appendChild(createShellDiagram(right.sym, right.valence));
+
+        container.appendChild(leftContainer);
+        container.appendChild(middleContainer);
+        container.appendChild(rightContainer);
+        
+        shellDisplay.appendChild(container);
+
+        // Create explanation
+        const explanation = document.createElement('div');
+        explanation.className = 'shell-explanation';
+        explanation.innerHTML = `
+          <h4>Electron Shell Analysis</h4>
+          <div class="electron-summary">
+            <div class="atom-summary ${left.sym.toLowerCase()}-summary">
+              <h5>${left.sym} (${left.sym === 'W' ? 'Metal' : left.sym === 'Si' ? 'Metalloid' : 'Noble Gas'})</h5>
+              <div><strong>Valence electrons:</strong> ${left.valence}/8</div>
+              <div><strong>Electron status:</strong> <span style="color: var(${leftStatus.colorClass})">${leftStatus.status}</span></div>
+              <div><strong>What it wants:</strong> ${leftStatus.description}</div>
+            </div>
+            <div class="atom-summary ${right.sym.toLowerCase()}-summary">
+              <h5>${right.sym} (${right.sym === 'W' ? 'Metal' : right.sym === 'Si' ? 'Metalloid' : 'Noble Gas'})</h5>
+              <div><strong>Valence electrons:</strong> ${right.valence}/8</div>
+              <div><strong>Electron status:</strong> <span style="color: var(${rightStatus.colorClass})">${rightStatus.status}</span></div>
+              <div><strong>What it wants:</strong> ${rightStatus.description}</div>
+            </div>
+          </div>
+          <div class="result-box">
+            <strong>Bond Prediction:</strong> ${bond}<br>
+            <strong>Why?</strong> ${reason}
+          </div>
+        `;
+        shellExpl.appendChild(explanation);
+
+        typeEl.textContent = bond;
+        explEl.textContent = reason;
+        result.classList.add('active');
+      } else {
+        titleEl.textContent = 'Select two elements';
+        deltaEl.textContent = '';
+        typeEl.textContent = '—';
+        explEl.textContent = 'Pick one from each column to see their electron shells.';
+        shellDisplay.innerHTML = `
+          <div style="text-align: center; padding: 2rem; color: var(--text-muted);">
+            <div style="font-size: 3rem; margin-bottom: 1rem;">⚛</div>
+            <div style="font-size: 1.2rem;">Select two elements to begin</div>
+            <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">
+              Try: Tungsten + Silicon to see an example
+            </div>
+          </div>
+        `;
+        shellExpl.innerHTML = '';
+        result.classList.remove('active');
+      }
+    }
+
+    leftOptions.forEach(opt => {
+      opt.addEventListener('click', () => {
+        left = { 
+          sym: opt.dataset.sym, 
+          en: parseFloat(opt.dataset.en),
+          valence: parseInt(opt.dataset.valence)
+        };
+        update();
+      });
+    });
+
+    rightOptions.forEach(opt => {
+      opt.addEventListener('click', () => {
+        right = { 
+          sym: opt.dataset.sym, 
+          en: parseFloat(opt.dataset.en),
+          valence: parseInt(opt.dataset.valence)
+        };
+        update();
+      });
+    });
+
+    // Initialize with example
+    setTimeout(() => {
+      left = { sym: 'W', en: 2.36, valence: 6 };
+      right = { sym: 'Si', en: 1.90, valence: 4 };
+      update();
+    }, 500);
+  </script>
+
+</body>
+</html>
