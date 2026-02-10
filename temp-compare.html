@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Phase Change Periodic Table</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #0d1117;
+      color: #e6edf3;
+      margin: 0;
+      padding: 2rem 1rem;
+      min-height: 100vh;
+    }
+
+    h1 {
+      text-align: center;
+      color: #7a92ad;
+      margin-bottom: 0.8rem;
+    }
+
+    .intro {
+      text-align: center;
+      color: #94a3b8;
+      margin-bottom: 1.5rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 0.95rem;
+    }
+
+    .slider-container {
+      max-width: 900px;
+      margin: 0 auto 2rem;
+      text-align: center;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      height: 12px;
+      background: #30363d;
+      border-radius: 6px;
+      outline: none;
+      appearance: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      appearance: none;
+      width: 24px;
+      height: 24px;
+      background: #58a6ff;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid #0d1117;
+    }
+
+    #current-temp {
+      font-size: 1.6rem;
+      font-weight: bold;
+      margin: 0.8rem 0;
+      color: #58a6ff;
+    }
+
+    .periodic-table {
+      display: grid;
+      grid-template-columns: repeat(18, 56px);
+      grid-auto-rows: 56px;
+      gap: 4px;
+      max-width: 1200px;
+      margin: 0 auto;
+      justify-content: center;
+    }
+
+    .element {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.85rem;
+      position: relative;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .element.empty {
+      background: transparent;
+      border: none;
+      pointer-events: none;
+    }
+
+    .element-symbol {
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+
+    .element-number {
+      font-size: 0.65rem;
+      color: #8b949e;
+      position: absolute;
+      top: 2px;
+      left: 3px;
+    }
+
+    .phase-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-top: 2px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      min-width: 50px;
+      text-align: center;
+    }
+
+    .solid   { background: #4a6a8a !important; color: white; }
+    .liquid  { background: #d97706 !important; color: white; }
+    .gas     { background: #0891b2 !important; color: white; }
+    .unknown { background: #6b7280 !important; color: #e6edf3; font-style: italic; }
+
+    .focus {
+      border: 2.5px solid #58a6ff !important;
+      box-shadow: 0 0 14px rgba(88,166,255,0.7);
+      transform: scale(1.08);
+      z-index: 5;
+    }
+
+    @media (max-width: 1000px) {
+      .periodic-table { grid-template-columns: repeat(18, 44px); gap: 3px; }
+      .element-symbol { font-size: 1.15rem; }
+      .phase-label { font-size: 0.62rem; min-width: 42px; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Phase Change Periodic Table </h1>
+  <p class="intro">
+    Slide temperature (0–6000 K) to show elements form at that temp<br>
+    (No lanthanides/actinides.)<br>
+    Focus elements: Si (metalloid), Rn (nonmetal), W (metal) glow blue.<br>
+    
+  </p>
+
+  <div class="slider-container">
+    <label for="temp-slider">Temperature: <span id="current-temp">0 K</span></label>
+    <input type="range" id="temp-slider" min="0" max="6000" value="0" step="20">
+  </div>
+
+  <div class="periodic-table" id="table"></div>
+
+  <div class="references" style="text-align:center; margin-top:3rem; font-size:0.85rem; color:#8b949e;">
+    Data from RSC Periodic Table(accessed Feb 2026).  "?" shows unknown.
+  </div>
+
+  <script>
+    const elementsData = [
+      // Period 1
+      {z:1, sym:'H', per:1, grp:1, melt:13.99, boil:20.28},
+      {z:2, sym:'He', per:1, grp:18, melt:0.95, boil:4.22},
+      // Period 2
+      {z:3, sym:'Li', per:2, grp:1, melt:453.7, boil:1615},
+      {z:4, sym:'Be', per:2, grp:2, melt:1560, boil:2742},
+      {z:5, sym:'B', per:2, grp:13, melt:2349, boil:4200},
+      // ───── Carbon fixed: melt set to very high value so liquid branch is never entered
+      // boil = sublimation temperature (solid → gas directly at ~3823 K at 1 atm)
+      {z:6, sym:'C', per:2, grp:14, melt: 100000, boil: 3823},
+      {z:7, sym:'N', per:2, grp:15, melt:63.23, boil:77.36},
+      {z:8, sym:'O', per:2, grp:16, melt:54.36, boil:90.19},
+      {z:9, sym:'F', per:2, grp:17, melt:53.48, boil:85},
+      {z:10, sym:'Ne', per:2, grp:18, melt:24.56, boil:27.1},
+      // Period 3
+      {z:11, sym:'Na', per:3, grp:1, melt:370.87, boil:1156},
+      {z:12, sym:'Mg', per:3, grp:2, melt:923, boil:1363},
+      {z:13, sym:'Al', per:3, grp:13, melt:933.47, boil:2792},
+      {z:14, sym:'Si', per:3, grp:14, melt:1687, boil:3538, focus:true},
+      {z:15, sym:'P', per:3, grp:15, melt:317.3, boil:553.6},
+      {z:16, sym:'S', per:3, grp:16, melt:388, boil:717.8},
+      {z:17, sym:'Cl', per:3, grp:17, melt:171.6, boil:239.11},
+      {z:18, sym:'Ar', per:3, grp:18, melt:83.81, boil:87.3},
+      // Period 4 (d-block starts)
+      {z:19, sym:'K', per:4, grp:1, melt:336.7, boil:1032},
+      {z:20, sym:'Ca', per:4, grp:2, melt:1115, boil:1762},
+      {z:21, sym:'Sc', per:4, grp:3, melt:1814, boil:3109},
+      {z:22, sym:'Ti', per:4, grp:4, melt:1941, boil:3560},
+      {z:23, sym:'V', per:4, grp:5, melt:2183, boil:3680},
+      {z:24, sym:'Cr', per:4, grp:6, melt:2180, boil:2944},
+      {z:25, sym:'Mn', per:4, grp:7, melt:1519, boil:2334},
+      {z:26, sym:'Fe', per:4, grp:8, melt:1811, boil:3134},
+      {z:27, sym:'Co', per:4, grp:9, melt:1768, boil:3200},
+      {z:28, sym:'Ni', per:4, grp:10, melt:1728, boil:3003},
+      {z:29, sym:'Cu', per:4, grp:11, melt:1357.8, boil:2835},
+      {z:30, sym:'Zn', per:4, grp:12, melt:692.7, boil:1180},
+      {z:31, sym:'Ga', per:4, grp:13, melt:302.91, boil:2673},
+      {z:32, sym:'Ge', per:4, grp:14, melt:1211.4, boil:3106},
+      {z:33, sym:'As', per:4, grp:15, melt:1090, boil:887},
+      {z:34, sym:'Se', per:4, grp:16, melt:494, boil:958},
+      {z:35, sym:'Br', per:4, grp:17, melt:265.8, boil:332},
+      {z:36, sym:'Kr', per:4, grp:18, melt:115.78, boil:119.8},
+      // Period 5 (d-block)
+      {z:37, sym:'Rb', per:5, grp:1, melt:312.46, boil:961},
+      {z:38, sym:'Sr', per:5, grp:2, melt:1050, boil:1655},
+      {z:39, sym:'Y', per:5, grp:3, melt:1799, boil:3609},
+      {z:40, sym:'Zr', per:5, grp:4, melt:2128, boil:4682},
+      {z:41, sym:'Nb', per:5, grp:5, melt:2750, boil:5017},
+      {z:42, sym:'Mo', per:5, grp:6, melt:2896, boil:4912},
+      {z:43, sym:'Tc', per:5, grp:7, melt:2430, boil:4538},
+      {z:44, sym:'Ru', per:5, grp:8, melt:2607, boil:4423},
+      {z:45, sym:'Rh', per:5, grp:9, melt:2237, boil:3968},
+      {z:46, sym:'Pd', per:5, grp:10, melt:1828, boil:3236},
+      {z:47, sym:'Ag', per:5, grp:11, melt:1234.9, boil:2435},
+      {z:48, sym:'Cd', per:5, grp:12, melt:594.2, boil:1040},
+      {z:49, sym:'In', per:5, grp:13, melt:429.75, boil:2345},
+      {z:50, sym:'Sn', per:5, grp:14, melt:505.08, boil:2875},
+      {z:51, sym:'Sb', per:5, grp:15, melt:903.78, boil:1908},
+      {z:52, sym:'Te', per:5, grp:16, melt:722.66, boil:1261},
+      {z:53, sym:'I', per:5, grp:17, melt:386.85, boil:457.4},
+      {z:54, sym:'Xe', per:5, grp:18, melt:161.4, boil:165.1},
+      // Period 6 (d-block + gap for lanthanides)
+      {z:55, sym:'Cs', per:6, grp:1, melt:301.7, boil:944},
+      {z:56, sym:'Ba', per:6, grp:2, melt:999, boil:2174},
+      {z:72, sym:'Hf', per:6, grp:4, melt:2506, boil:4876},
+      {z:73, sym:'Ta', per:6, grp:5, melt:3290, boil:5731},
+      {z:74, sym:'W', per:6, grp:6, melt:3695, boil:5828, focus:true},
+      {z:75, sym:'Re', per:6, grp:7, melt:3459, boil:5869},
+      {z:76, sym:'Os', per:6, grp:8, melt:3306, boil:5285},
+      {z:77, sym:'Ir', per:6, grp:9, melt:2719, boil:4701},
+      {z:78, sym:'Pt', per:6, grp:10, melt:2041.4, boil:4098},
+      {z:79, sym:'Au', per:6, grp:11, melt:1337.33, boil:3129},
+      {z:80, sym:'Hg', per:6, grp:12, melt:234.32, boil:629.88},
+      {z:81, sym:'Tl', per:6, grp:13, melt:577, boil:1746},
+      {z:82, sym:'Pb', per:6, grp:14, melt:600.61, boil:2022},
+      {z:83, sym:'Bi', per:6, grp:15, melt:544.7, boil:1837},
+      {z:84, sym:'Po', per:6, grp:16, melt:527, boil:1235},
+      {z:85, sym:'At', per:6, grp:17, melt:575, boil:610},
+      {z:86, sym:'Rn', per:6, grp:18, melt:202, boil:211.5, focus:true},
+      // Period 7 (d-block + gap for actinides)
+      {z:87, sym:'Fr', per:7, grp:1, melt:300, boil:950},
+      {z:88, sym:'Ra', per:7, grp:2, melt:973, boil:2010},
+      {z:104, sym:'Rf', per:7, grp:4, melt: null, boil:null},
+      {z:105, sym:'Db', per:7, grp:5, melt: null, boil:null},
+      {z:106, sym:'Sg', per:7, grp:6, melt: null, boil:null},
+      {z:107, sym:'Bh', per:7, grp:7, melt: null, boil:null},
+      {z:108, sym:'Hs', per:7, grp:8, melt: null, boil:null},
+      {z:109, sym:'Mt', per:7, grp:9, melt: null, boil:null},
+      {z:110, sym:'Ds', per:7, grp:10, melt: null, boil:null},
+      {z:111, sym:'Rg', per:7, grp:11, melt: null, boil:null},
+      {z:112, sym:'Cn', per:7, grp:12, melt: null, boil:null},
+      {z:113, sym:'Nh', per:7, grp:13, melt: null, boil:null},
+      {z:114, sym:'Fl', per:7, grp:14, melt: null, boil:null},
+      {z:115, sym:'Mc', per:7, grp:15, melt: null, boil:null},
+      {z:116, sym:'Lv', per:7, grp:16, melt: null, boil:null},
+      {z:117, sym:'Ts', per:7, grp:17, melt: null, boil:null},
+      {z:118, sym:'Og', per:7, grp:18, melt: null, boil:null}
+    ];
+
+    const table = document.getElementById('table');
+    const tempDisplay = document.getElementById('current-temp');
+    const slider = document.getElementById('temp-slider');
+
+    // Build 7 rows × 18 columns
+    for (let per = 1; per <= 7; per++) {
+      for (let grp = 1; grp <= 18; grp++) {
+        const cell = document.createElement('div');
+        cell.className = 'element empty';
+        const el = elementsData.find(e => e.per === per && e.grp === grp);
+        if (el) {
+          cell.className = 'element';
+          cell.innerHTML = `
+            <span class="element-number">${el.z}</span>
+            <span class="element-symbol">${el.sym}</span>
+            <span class="phase-label solid">Solid</span>
+          `;
+          if (el.focus) cell.classList.add('focus');
+          cell.title = `${el.sym} (Z=${el.z}): melt ${el.melt || '?'} K, boil ${el.boil || '?'} K`;
+        }
+        table.appendChild(cell);
+      }
+    }
+
+    function getPhase(el, temp) {
+      if (!el.melt && !el.boil) return {cls: 'unknown', text: '?'};
+      if (temp >= (el.boil || Infinity)) return {cls: 'gas', text: 'Gas'};
+      if (temp >= el.melt) return {cls: 'liquid', text: 'Liquid'};
+      return {cls: 'solid', text: 'Solid'};
+    }
+
+    function updatePhases(temp) {
+      tempDisplay.textContent = `${temp} K`;
+      document.querySelectorAll('.element:not(.empty)').forEach(cell => {
+        const z = parseInt(cell.querySelector('.element-number').textContent);
+        const el = elementsData.find(e => e.z === z);
+        const label = cell.querySelector('.phase-label');
+        const phase = getPhase(el, temp);
+        label.className = `phase-label ${phase.cls}`;
+        label.textContent = phase.text;
+      });
+    }
+
+    slider.addEventListener('input', e => updatePhases(parseInt(e.target.value)));
+    updatePhases(0);
+  </script>
+
+</body>
+</html>
