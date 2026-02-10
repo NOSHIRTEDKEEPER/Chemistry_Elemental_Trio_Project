@@ -1,1 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tungsten vs Silicon vs Radon — Extensive Comparison</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --accent: #58a6ff;
+      --tungsten: #4a6a8a;
+      --silicon: #7c3aed;
+      --radon: #e11d48;
+      --title-blue-gray: #7a92ad;
+      --tagline-blue-gray: #94a3b8;
+      --border: #30363d;
+    }
 
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    nav {
+      position: fixed;
+      top: 1rem;
+      right: 2rem;
+      z-index: 100;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--accent); }
+
+    header.hero {
+      text-align: center;
+      padding: 7rem 1rem 4rem;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 9vw, 4.5rem);
+      margin-bottom: 1rem;
+      color: var(--title-blue-gray);
+      letter-spacing: -0.02em;
+    }
+
+    .tagline {
+      font-size: 1.25rem;
+      color: var(--tagline-blue-gray);
+      max-width: 720px;
+      margin: 0 auto 3rem;
+      line-height: 1.5;
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .comparison-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: all 0.22s ease;
+    }
+
+    .comparison-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+    }
+
+    h2, h3 {
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    h2 { font-size: 2rem; }
+    h3 { font-size: 1.5rem; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.95rem;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 1rem;
+      text-align: left;
+    }
+
+    th {
+      background: rgba(88,166,255,0.1);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .question {
+      background: rgba(88,166,255,0.08);
+      border-left: 5px solid var(--accent);
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+      color: var(--text);
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 1.5rem;
+    }
+
+    ul li {
+      margin-bottom: 0.8rem;
+      position: relative;
+    }
+
+    ul li::before {
+      content: "•";
+      color: var(--accent);
+      position: absolute;
+      left: -1.2rem;
+      font-size: 1.4rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 4rem 1rem 2rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 800px) {
+      header.hero { padding-top: 5rem; padding-bottom: 3rem; }
+      .comparison-grid { grid-template-columns: 1fr; }
+      nav { top: 0.8rem; right: 1rem; gap: 1rem; font-size: 0.95rem; }
+      table { font-size: 0.9rem; }
+      th, td { padding: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="tungsten.html">Tungsten</a>
+    <a href="silicon.html">Silicon</a>
+    <a href="radon.html">Radon</a>
+    <a href="compare.html">Compare</a>
+  </nav>
+
+  <header class="hero">
+    <h1>Tungsten vs Silicon vs Radon</h1>
+    <p class="tagline">
+      One metal, one metalloid, one noble gas.<br>
+      Exploring why their bonding, properties, and behaviors differ so dramatically — from periodic trends to real-world uses.
+    </p>
+  </header>
+
+  <main class="comparison-grid">
+
+    <div class="comparison-card">
+      <h2>Creative Hook</h2>
+      <div class="question">
+        If atoms could choose friends, which of these three would bond easily, which would be picky, and which would avoid bonding entirely?
+      </div>
+    </div>
+
+    <div class="comparison-card">
+      <h2>1. Basic Atomic Properties</h2>
+      <table>
+        <tr><th>Property</th><th>Tungsten (W)</th><th>Silicon (Si)</th><th>Radon (Rn)</th></tr>
+        <tr><td>Element Type</td><td>Transition Metal</td><td>Metalloid</td><td>Noble Gas Nonmetal</td></tr>
+        <tr><td>Atomic Number</td><td>74</td><td>14</td><td>86</td></tr>
+        <tr><td>Periodic Position</td><td>Center metal block (group 6, period 6)</td><td>Staircase boundary (group 14, period 3)</td><td>Far right noble gas column (group 18, period 6)</td></tr>
+        <tr><td>Outer Electron Behavior</td><td>Loosely held (d-electrons involved)</td><td>Moderately held (hybridized sp³)</td><td>Full outer shell (stable octet)</td></tr>
+      </table>
+      <p>Periodic position strongly predicts bonding: metals lose/share electrons freely, metalloids share selectively, noble gases stay inert.</p>
+    </div>
+
+    <div class="comparison-card">
+      <h2>2. Bonding Behavior — The WHY</h2>
+
+      <h3>Tungsten (Metallic Bonding)</h3>
+      <p>Tungsten atoms release electrons easily into a "sea" shared among many atoms → metallic bonding. This delocalized electron cloud explains excellent conductivity, malleability, and its record-high melting point (3695 K).</p>
+      <div class="question">Why would mobile electrons help heat and electricity flow easily?</div>
+
+      <h3>Silicon (Covalent Network Bonding)</h3>
+      <p>Silicon shares electrons in strong directional covalent bonds, forming a giant tetrahedral network. This rigid lattice gives hardness, high melting point (1687 K), and semiconductor properties (band gap allows controlled conductivity).</p>
+      <div class="question">Why might sharing electrons be more stable than fully gaining or losing them for silicon?</div>
+
+      <h3>Radon (Minimal Bonding)</h3>
+      <p>Radon has a complete valence shell (Rn: [Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁶). Bonding would disrupt this stability with little energy gain → extreme inertness (mp 202 K, bp 211.5 K).</p>
+      <div class="question">If bonding lowers energy, what happens when an atom is already low-energy and stable?</div>
+    </div>
+
+    <div class="comparison-card">
+      <h2>3. Physical Property Comparison</h2>
+      <table>
+        <tr><th>Property</th><th>Tungsten</th><th>Silicon</th><th>Radon</th></tr>
+        <tr><td>State at Room Temp</td><td>Solid metal</td><td>Solid crystalline</td><td>Radioactive gas</td></tr>
+        <tr><td>Melting Point</td><td>3695 K (highest of all metals)</td><td>1687 K</td><td>202 K</td></tr>
+        <tr><td>Boiling Point</td><td>~5828 K</td><td>3538 K</td><td>211.5 K</td></tr>
+        <tr><td>Electrical Conductivity</td><td>Excellent conductor</td><td>Semiconductor</td><td>Insulator</td></tr>
+        <tr><td>Mechanical Traits</td><td>Strong, dense (19.25 g/cm³), ductile at high temp</td><td>Brittle crystal</td><td>Gas, no rigidity</td></tr>
+      </table>
+      <p>Bonding type dictates everything: metallic → strength + conductivity; covalent network → rigidity; van der Waals → gas at room temp.</p>
+    </div>
+
+    <div class="comparison-card">
+      <h2>4. Chemical Reactivity</h2>
+      <ul>
+        <li><strong>Tungsten:</strong> Moderately reactive; forms oxides (WO₃), carbides, alloys; resists most acids.</li>
+        <li><strong>Silicon:</strong> Reacts selectively; forms SiO₂ (silica), silicates, halides; passivates with oxide layer.</li>
+        <li><strong>Radon:</strong> Extremely low reactivity; some exotic compounds (e.g., RnF₂) under special conditions, but mostly inert.</li>
+      </ul>
+      <p>Electronegativity (W ~2.36, Si ~1.90, Rn ~2.2) and valence shell drive these differences.</p>
+    </div>
+
+    <div class="comparison-card">
+      <h2>5. Real-World Applications</h2>
+      <ul>
+        <li><strong>Tungsten:</strong> Light bulb filaments, welding electrodes, high-temp tools, aerospace alloys, radiation shielding.</li>
+        <li><strong>Silicon:</strong> Semiconductors (chips), solar cells, glass, ceramics, silicone polymers.</li>
+        <li><strong>Radon:</strong> Limited uses (e.g., cancer therapy research); mainly known as health hazard (radioactive indoor gas).</li>
+      </ul>
+      <p>Applications mirror bonding: extreme durability, tunable electronics, inert/radioactive gas behavior.</p>
+    </div>
+
+    <div class="comparison-card">
+      <h2>6. Similarities</h2>
+      <ul>
+        <li>All are naturally occurring elements on the periodic table.</li>
+        <li>Obey periodic trends (atomic size, ionization energy, electronegativity).</li>
+        <li>Electron configuration ultimately determines their properties.</li>
+        <li>Each has significant scientific, industrial, or environmental importance.</li>
+      </ul>
+    </div>
+
+    <div class="comparison-card">
+      <h2>7. Key Differences</h2>
+      <ul>
+        <li>Classification: metal vs metalloid vs noble gas.</li>
+        <li>Bonding: strong metallic vs covalent network vs virtually none.</li>
+        <li>Conductivity: conductor vs semiconductor vs insulator.</li>
+        <li>Physical form: ultra-high-temp solid vs brittle high-mp solid vs low-temp radioactive gas.</li>
+      </ul>
+    </div>
+
+    <div class="comparison-card">
+      <h2>8. Big Scientific Takeaway</h2>
+      <p>Bonding and behavior are predictable from periodic table location. Metals delocalize electrons for strength/conductivity, metalloids form covalent networks for versatility, noble gases stay inert due to stability. This explains everything from materials science to electronics and environmental risks.</p>
+      <div class="question">Final reflection: Can you predict bonding type just from periodic table location now?</div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>Understanding periodic trends unlocks why these three elements — despite being so different — tell a unified story about chemistry.</p>
+  </footer>
+
+</body>
+</html>
