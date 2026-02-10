@@ -1,1 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Elements Unveiled: Tungsten · Silicon · Radon</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --accent: #58a6ff;
+      --tungsten: #4a6a8a;
+      --silicon: #7c3aed;
+      --radon: #e11d48;
+      --title-blue-gray: #7a92ad;
+      --tagline-blue-gray: #94a3b8;
+    }
 
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    nav {
+      position: fixed;
+      top: 1rem;
+      right: 2rem;
+      z-index: 100;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--accent); }
+
+    header.hero {
+      text-align: center;
+      padding: 7rem 1rem 4rem;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 9vw, 5rem);
+      margin-bottom: 1rem;
+      color: var(--title-blue-gray);
+      letter-spacing: -0.02em;
+    }
+
+    .tagline {
+      font-size: 1.25rem;
+      color: var(--tagline-blue-gray);
+      max-width: 640px;
+      margin: 0 auto 3rem;
+      line-height: 1.5;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .element-card {
+      background: var(--surface);
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.22s ease;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .element-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--accent);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+    }
+
+    .card-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 5px solid;
+    }
+
+    .card-body {
+      padding: 1.6rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-title {
+      font-size: 1.75rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .card-desc {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      flex-grow: 1;
+    }
+
+    .compare-button {
+      display: block;
+      width: fit-content;
+      margin: 3rem auto;
+      padding: 1rem 2rem;
+      background: var(--surface);
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      color: var(--text);
+      font-size: 1.3rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.22s ease;
+    }
+
+    .compare-button:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent);
+      background: rgba(88,166,255,0.1);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+    }
+
+    footer {
+      text-align: center;
+      padding: 4rem 1rem 2rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 600px) {
+      header.hero { padding-top: 5rem; }
+      nav { top: 0.8rem; right: 1rem; gap: 1rem; font-size: 0.95rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="tungsten.html">Tungsten</a>
+    <a href="silicon.html">Silicon</a>
+    <a href="radon.html">Radon</a>
+    <a href="compare.html">Compare</a>
+  </nav>
+
+  <header class="hero">
+    <h1>Tungsten · Silicon · Radon</h1>
+    <p class="tagline">
+      One metal ,<br>
+      one metalloid,<br>
+      and one noble gas,<br>
+      What makes them different, and what do they have in common?
+    </p>
+  </header>
+
+  <main class="card-grid">
+    <a href="tungsten.html" class="element-card">
+      <img class="card-img" src="tungsten.png" alt="Glowing tungsten filament" style="border-bottom-color: var(--tungsten);">
+      <div class="card-body">
+        <h2 class="card-title">Tungsten (W)</h2>
+        <p class="card-desc">It has the highest melting point of any metal and survives conditions that destroy almost everything else!</p>
+      </div>
+    </a>
+
+    <a href="silicon.html" class="element-card">
+      <img class="card-img" src="silicon.png" alt="Silicon wafer" style="border-bottom-color: var(--silicon);">
+      <div class="card-body">
+        <h2 class="card-title">Silicon (Si)</h2>
+        <p class="card-desc">The metalloid that makes up the brain of almost every modern device! And... sand.</p>
+      </div>
+    </a>
+
+    <a href="radon.html" class="element-card">
+      <img class="card-img" src="radon.png" alt="Radon visualization" style="border-bottom-color: var(--radon);">
+      <div class="card-body">
+        <h2 class="card-title">Radon (Rn)</h2>
+        <p class="card-desc">Its invisible, odorless, and radioactive!</p>
+      </div>
+    </a>
+  </main>
+
+  <div style="text-align:center; margin:3rem 0;">
+    <a href="compare.html" class="compare-button">
+      Compare the elements →
+    </a>
+  </div>
+
+  <footer>
+    <p>Metal, Metalloid, Non-Metal, what's the diff? </p>
+  
+  </footer>
+
+</body>
+</html>
