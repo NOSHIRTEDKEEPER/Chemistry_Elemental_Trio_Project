@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tungsten (W) – concise RSC summary</title>
+
+  <!-- same style as index, concise academic tone -->
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --accent: #58a6ff;
+      --tungsten: #4a6a8a;
+      --silicon: #7c3aed;
+      --radon: #e11d48;
+      --title-blue-gray: #7a92ad;
+      --tagline-blue-gray: #94a3b8;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, 'Times New Roman', serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    nav {
+      position: fixed;
+      top: 1rem;
+      right: 2rem;
+      z-index: 100;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--accent); }
+
+    header.hero {
+      text-align: center;
+      padding: 7rem 1rem 3rem;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 9vw, 4.5rem);
+      margin-bottom: 0.5rem;
+      color: var(--title-blue-gray);
+    }
+
+    .tagline {
+      font-size: 1.2rem;
+      color: var(--tagline-blue-gray);
+      max-width: 700px;
+      margin: 0 auto 2rem;
+    }
+
+    .content-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .element-card {
+      background: var(--surface);
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.22s ease;
+      margin-bottom: 1.8rem;
+    }
+
+    .element-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+    }
+
+    .card-body {
+      padding: 1.6rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+      color: var(--tungsten);
+      border-left: 4px solid var(--accent);
+      padding-left: 1rem;
+      font-weight: 600;
+    }
+
+    .section-text {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    ul, ol {
+      color: var(--text-muted);
+      padding-left: 1.8rem;
+      margin: 0.5rem 0;
+    }
+
+    li {
+      margin: 0.3rem 0;
+    }
+
+    strong {
+      color: var(--text);
+    }
+
+    .compare-button {
+      display: block;
+      width: fit-content;
+      margin: 2.5rem auto;
+      padding: 0.9rem 2rem;
+      background: var(--surface);
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      color: var(--text);
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .compare-button:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      background: rgba(88,166,255,0.1);
+    }
+
+    footer {
+      text-align: center;
+      padding: 3rem 1rem 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid #30363d;
+      margin-top: 1rem;
+    }
+
+    .rsc-note {
+      font-size: 0.85rem;
+      color: #6b7f90;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="tungsten.html">Tungsten</a>
+  <a href="silicon.html">Silicon</a>
+  <a href="radon.html">Radon</a>
+  <a href="compare.html">Compare</a>
+</nav>
+
+<header class="hero">
+  <h1>Tungsten (W)</h1>
+  <p class="tagline">Group 6 · Period 6 · d‑block · transition metal</p>
+</header>
+
+<div class="content-wrapper">
+
+  <!-- 1. DISCOVERY & BASIC STATS (RSC concise) -->
+  <div class="element-card">
+    <div class="card-body">
+      <h2 class="section-title">Discovery & basic data</h2>
+      <p class="section-text">
+        <strong>History (RSC):</strong> 1781 – Scheele identified an oxide from scheelite. 1783 – Elhuyar brothers reduced WO₃ with carbon to isolate the metal. Symbol W from wolframite.<br>
+        <strong>Statistics:</strong> Atomic number 74 · Mass 183.84 u · Stable isotopes: ¹⁸²W, ¹⁸⁴W, ¹⁸⁶W (¹⁸⁴W most abundant). CAS 7440-33-7.
+      </p>
+    </div>
+  </div>
+
+  <!-- 2. PERIODIC TABLE & OCCURRENCE (RSC) -->
+  <div class="element-card">
+    <div class="card-body">
+      <h2 class="section-title">Position & origin</h2>
+      <p class="section-text">
+        <strong>Location:</strong> Group 6, period 6, d‑block. <strong>Principal ores:</strong> scheelite (CaWO₄) and wolframite [(Fe,Mn)WO₄]. Major producers: China, Russia, Vietnam.
+      </p>
+    </div>
+  </div>
+
+  <!-- 3. PHYSICAL PROPERTIES (RSC) -->
+  <div class="element-card">
+    <div class="card-body">
+      <h2 class="section-title">Physical properties</h2>
+      <ul class="section-text">
+        <li><strong>State at 20 °C:</strong> solid, silvery‑white.</li>
+        <li><strong>Density:</strong> 19.3 g·cm⁻³.</li>
+        <li><strong>Melting point:</strong> 3414 °C (highest of all metals).</li>
+        <li><strong>Boiling point:</strong> 5555 °C.</li>
+        <li><strong>Hardness:</strong> Mohs ~7.5 (pure metal).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 4. CHEMICAL PROPERTIES (RSC) -->
+  <div class="element-card">
+    <div class="card-body">
+      <h2 class="section-title">Chemical properties</h2>
+      <ul class="section-text">
+        <li><strong>Reactivity:</strong> Inert at RT; resists O₂, H₂O, most acids. Soluble in HF/HNO₃.</li>
+        <li><strong>Configuration:</strong> [Xe] 4f¹⁴ 5d⁴ 6s².</li>
+        <li><strong>Electronegativity:</strong> 2.36 (Pauling).</li>
+        <li><strong>Ionisation energies (kJ/mol):</strong> 770, 1700, 2300.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 5. BONDING & IONS (RSC + biological note) -->
+  <div class="element-card">
+    <div class="card-body">
+      <h2 class="section-title">Bonding & ions</h2>
+      <p class="section-text">
+        <strong>Bonding:</strong> Metallic (strong, high m.p.).<br>
+        <strong>Oxidation states:</strong> −2 to +6; most stable <strong>+6</strong> (WO₃, [WO₄]²⁻).<br>
+        <strong>Biological role (RSC):</strong> Heaviest element used by life – in bacterial enzymes for aldehyde synthesis.
+      </p>
+    </div>
+  </div>
+
+  <!-- 6. APPLICATIONS (RSC derived) -->
+  <div class="element-card">
+    <div class="card-body">
+      <h2 class="section-title">Applications</h2>
+      <ul class="section-text">
+        <li><strong>Alloys:</strong> High‑speed steels, superalloys, furnace parts.</li>
+        <li><strong>Tungsten carbide (WC):</strong> Cutting/drilling tools, mining.</li>
+        <li><strong>Lighting:</strong> Historically filaments; Ca/Mg tungstates as phosphors.</li>
+        <li><strong>High‑density uses:</strong> Ballast, aircraft, armour penetrators.</li>
+        <li><strong>Catalysis:</strong> WO₃, sulfides in petrochemical and environmental processes.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 7. NAME NOTE (RSC podcast) -->
+  <div class="element-card">
+    <div class="card-body">
+      <h2 class="section-title">Name & symbol</h2>
+      <p class="section-text">
+        <strong>W</strong> from <em>wolfram</em> (older name); <em>tungsten</em> (Swedish “heavy stone”) is now IUPAC official. Symbol W remains historical.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<a href="compare.html" class="compare-button">
+  Compare elements →
+</a>
+
+<footer>
+  <p>Based on Royal Society of Chemistry data. Tungsten: refractory, dense, biologically relevant.</p>
+</footer>
+
+</body>
+</html>
