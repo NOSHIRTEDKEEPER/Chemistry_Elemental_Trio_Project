@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Silicon (Si) – concise RSC summary</title>
+
+  <!-- same style as index/tungsten -->
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --accent: #58a6ff;
+      --silicon: #7c3aed;      /* purple for silicon */
+      --title-blue-gray: #7a92ad;
+      --tagline-blue-gray: #94a3b8;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, 'Times New Roman', serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    nav {
+      position: fixed;
+      top: 1rem;
+      right: 2rem;
+      z-index: 100;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--accent); }
+
+    header.hero {
+      text-align: center;
+      padding: 7rem 1rem 3rem;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 9vw, 4.5rem);
+      margin-bottom: 0.5rem;
+      color: var(--title-blue-gray);
+    }
+
+    .tagline {
+      font-size: 1.2rem;
+      color: var(--tagline-blue-gray);
+      max-width: 700px;
+      margin: 0 auto 2rem;
+    }
+
+    .content-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .element-card {
+      background: var(--surface);
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.22s ease;
+      margin-bottom: 1.8rem;
+    }
+
+    .element-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+    }
+
+    .card-body {
+      padding: 1.6rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+      color: var(--silicon);
+      border-left: 4px solid var(--accent);
+      padding-left: 1rem;
+      font-weight: 600;
+    }
+
+    .section-text {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    ul, ol {
+      color: var(--text-muted);
+      padding-left: 1.8rem;
+      margin: 0.5rem 0;
+    }
+
+    li {
+      margin: 0.3rem 0;
+    }
+
+    strong {
+      color: var(--text);
+    }
+
+    .compare-button {
+      display: block;
+      width: fit-content;
+      margin: 2.5rem auto;
+      padding: 0.9rem 2rem;
+      background: var(--surface);
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      color: var(--text);
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .compare-button:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      background: rgba(88,166,255,0.1);
+    }
+
+    footer {
+      text-align: center;
+      padding: 3rem 1rem 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid #30363d;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="tungsten.html">Tungsten</a>
+  <a href="silicon.html">Silicon</a>
+  <a href="radon.html">Radon</a>
+  <a href="compare.html">Compare</a>
+</nav>
+
+<header class="hero">
+  <h1>Silicon (Si)</h1>
+  <p class="tagline">Group 14 · Period 3 · p‑block · metalloid</p>
+</header>
+
+<div class="content-wrapper">
+
+  <!-- 1. Discovery & basic stats (RSC) -->
+  <div class="element-card">
+    <div class="card-body">
+      <h2 class="section-title">Discovery & basic data</h2>
+      <p class="section-text">
+        <strong>History (RSC):</strong> Identified in 1824 by Jöns Jacob Berzelius (Sweden) by heating potassium fluorosilicate with potassium. Named from Latin <em>silex</em> (flint).<br>
+        <strong>Statistics:</strong> Atomic number 14 · Mass 28.0855 u · Stable isotopes: <sup>28</sup>Si (92.2%), <sup>29</sup>Si (4.7%), <sup>30</sup>Si (3.1%). CAS 7440-21-3.
+      </p>
+    </div>
+  </div>
+
+  <!-- 2. Periodic location & origin (RSC) -->
+  <div class="element-card">
+    <div class="card-body">
+      <h2 class="section-title">Position & origin</h2>
+      <p class="section-text">
+        <strong>Location:</strong> Group 14 (carbon group), period 3, p‑block – a metalloid.<br>
+        <strong>Natural abundance:</strong> Second most abundant element in Earth’s crust (~28%). Found as silica (SiO₂) and silicates. Major sources: quartz, sand.
+      </p>
+    </div>
+  </div>
+
+  <!-- 3. Physical properties (RSC) -->
+  <div class="element-card">
+    <div class="card-body">
+      <h2 class="section-title">Physical properties</h2>
+      <ul class="section-text">
+        <li><strong>State at 20 °C:</strong> solid, dark grey with bluish tinge, metallic lustre.</li>
+        <li><strong>Density:</strong> 2.33 g·cm⁻³.</li>
+        <li><strong>Melting point:</strong> 1414 °C.</li>
+        <li><strong>Boiling point:</strong> 3265 °C.</li>
+        <li><strong>Hardness:</strong> brittle, 6.5 Mohs.</li>
+        <li><strong>Semiconductor:</strong> electrical conductivity increases with temperature (typical for metalloids).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 4. Chemical properties (RSC) -->
+  <div class="element-card">
+    <div class="card-body">
+      <h2 class="section-title">Chemical properties</h2>
+      <ul class="section-text">
+        <li><strong>Reactivity:</strong> Relatively inert at RT; attacked by hot alkalis and halogens. Combines with oxygen at high T to form SiO₂.</li>
+        <li><strong>Configuration:</strong> [Ne] 3s² 3p².</li>
+        <li><strong>Electronegativity:</strong> 1.90 (Pauling).</li>
+        <li><strong>Ionisation energies (kJ/mol):</strong> 786, 1577, 3231.</li>
+        <li><strong>Common oxidation states:</strong> +4 (most stable, e.g. SiO₂, silicates), also +2 (rare).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 5. Bonding & ions (RSC) -->
+  <div class="element-card">
+    <div class="card-body">
+      <h2 class="section-title">Bonding & ions</h2>
+      <p class="section-text">
+        <strong>Bonding:</strong> Covalent network in elemental form (diamond structure). Forms predominantly covalent compounds; in silicates, bonding is covalent/ionic.<br>
+        <strong>Ions:</strong> Does not form simple cations; exists as oxyanions (silicates, e.g. SiO₄⁴⁻). No stable monatomic ions in solution.
+      </p>
+    </div>
+  </div>
+
+  <!-- 6. Applications (RSC) -->
+  <div class="element-card">
+    <div class="card-body">
+      <h2 class="section-title">Applications</h2>
+      <ul class="section-text">
+        <li><strong>Semiconductors:</strong> Base material for microchips, transistors, solar cells (high‑purity silicon).</li>
+        <li><strong>Glass & ceramics:</strong> Silica (SiO₂) for windows, containers; also in porcelain, enamels.</li>
+        <li><strong>Silicones:</strong> Polymers with alternating Si–O backbones; used in sealants, lubricants, medical implants.</li>
+        <li><strong>Alloys:</strong> Ferrosilicon in steelmaking to improve strength and deoxidise.</li>
+        <li><strong>Construction:</strong> Cement and concrete rely on silicate aggregates.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 7. Name note (RSC) -->
+  <div class="element-card">
+    <div class="card-body">
+      <h2 class="section-title">Name</h2>
+      <p class="section-text">
+        From Latin <em>silex</em> (flint) because of its occurrence in flint (a form of silica). The name was coined by Thomas Thomson (1817) and adopted by Berzelius.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<a href="compare.html" class="compare-button">
+  Compare elements →
+</a>
+
+<footer>
+  <p>Based on Royal Society of Chemistry data. Silicon: metalloid, semiconductor, backbone of modern electronics.</p>
+</footer>
+
+</body>
+</html>
