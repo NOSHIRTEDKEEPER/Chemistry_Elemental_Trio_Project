@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Radon (Rn) – concise RSC summary</title>
+
+  <!-- same style as index/tungsten -->
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --accent: #58a6ff;
+      --radon: #e11d48;         /* red-pink for radon */
+      --title-blue-gray: #7a92ad;
+      --tagline-blue-gray: #94a3b8;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, 'Times New Roman', serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    nav {
+      position: fixed;
+      top: 1rem;
+      right: 2rem;
+      z-index: 100;
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--accent); }
+
+    header.hero {
+      text-align: center;
+      padding: 7rem 1rem 3rem;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 9vw, 4.5rem);
+      margin-bottom: 0.5rem;
+      color: var(--title-blue-gray);
+    }
+
+    .tagline {
+      font-size: 1.2rem;
+      color: var(--tagline-blue-gray);
+      max-width: 700px;
+      margin: 0 auto 2rem;
+    }
+
+    .content-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    .element-card {
+      background: var(--surface);
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.22s ease;
+      margin-bottom: 1.8rem;
+    }
+
+    .element-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+    }
+
+    .card-body {
+      padding: 1.6rem;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+      color: var(--radon);
+      border-left: 4px solid var(--accent);
+      padding-left: 1rem;
+      font-weight: 600;
+    }
+
+    .section-text {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    ul, ol {
+      color: var(--text-muted);
+      padding-left: 1.8rem;
+      margin: 0.5rem 0;
+    }
+
+    li {
+      margin: 0.3rem 0;
+    }
+
+    strong {
+      color: var(--text);
+    }
+
+    .compare-button {
+      display: block;
+      width: fit-content;
+      margin: 2.5rem auto;
+      padding: 0.9rem 2rem;
+      background: var(--surface);
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      color: var(--text);
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .compare-button:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      background: rgba(88,166,255,0.1);
+    }
+
+    footer {
+      text-align: center;
+      padding: 3rem 1rem 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid #30363d;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="tungsten.html">Tungsten</a>
+  <a href="silicon.html">Silicon</a>
+  <a href="radon.html">Radon</a>
+  <a href="compare.html">Compare</a>
+</nav>
+
+<header class="hero">
+  <h1>Radon (Rn)</h1>
+  <p class="tagline">Group 18 · Period 6 · p‑block · noble gas · radioactive</p>
+</header>
+
+<div class="content-wrapper">
+
+  <!-- 1. Discovery & basic stats (RSC) -->
+  <div class="element-card">
+    <div class="card-body">
+      <h2 class="section-title">Discovery & basic data</h2>
+      <p class="section-text">
+        <strong>History (RSC):</strong> Discovered in 1900 by Friedrich Ernst Dorn (Germany) while studying radium decay; called it “radium emanation”. Independently isolated by Ramsay and Soddy (1903).<br>
+        <strong>Statistics:</strong> Atomic number 86 · Mass of most stable isotope <sup>222</sup>Rn 222.0176 u · No stable isotopes; <sup>222</sup>Rn (half‑life 3.823 d) is the longest‑lived natural isotope.
+      </p>
+    </div>
+  </div>
+
+  <!-- 2. Periodic location & origin (RSC) -->
+  <div class="element-card">
+    <div class="card-body">
+      <h2 class="section-title">Position & origin</h2>
+      <p class="section-text">
+        <strong>Location:</strong> Group 18 (noble gases), period 6, p‑block.<br>
+        <strong>Origin:</strong> Continuously produced by radioactive decay of radium (uranium/thorium series). Found in trace amounts in soil, groundwater, and air.
+      </p>
+    </div>
+  </div>
+
+  <!-- 3. Physical properties (RSC) -->
+  <div class="element-card">
+    <div class="card-body">
+      <h2 class="section-title">Physical properties</h2>
+      <ul class="section-text">
+        <li><strong>State at 20 °C:</strong> colourless, odourless gas (glows yellow/red when cooled).</li>
+        <li><strong>Density:</strong> 9.73 g/L at STP – heaviest known gas.</li>
+        <li><strong>Melting point:</strong> −71 °C.</li>
+        <li><strong>Boiling point:</strong> −61.7 °C.</li>
+        <li><strong>Radioactivity:</strong> alpha emitter (hazardous).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 4. Chemical properties (RSC) -->
+  <div class="element-card">
+    <div class="card-body">
+      <h2 class="section-title">Chemical properties</h2>
+      <ul class="section-text">
+        <li><strong>Reactivity:</strong> Noble gas – extremely inert under normal conditions. Forms no stable compounds at RT; under extreme conditions (e.g. fluorine at high T) may form RnF₂ (predicted).</li>
+        <li><strong>Configuration:</strong> [Xe] 4f¹⁴ 5d¹⁰ 6s² 6p⁶ (closed shell).</li>
+        <li><strong>Electronegativity:</strong> not applicable (no stable compounds).</li>
+        <li><strong>Ionisation energy:</strong> 1037 kJ/mol (first).</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 5. Bonding & ions (RSC) -->
+  <div class="element-card">
+    <div class="card-body">
+      <h2 class="section-title">Bonding & ions</h2>
+      <p class="section-text">
+        <strong>Bonding:</strong> Monatomic; only van der Waals forces between atoms.<br>
+        <strong>Ions:</strong> No stable ions in solution. Rn⁺ and Rn²⁺ have been detected in gas phase mass spectrometry.
+      </p>
+    </div>
+  </div>
+
+  <!-- 6. Applications & hazard (RSC) -->
+  <div class="element-card">
+    <div class="card-body">
+      <h2 class="section-title">Applications & hazard</h2>
+      <ul class="section-text">
+        <li><strong>Radiotherapy (historical):</strong> Used in sealed seeds for cancer treatment (now largely replaced).</li>
+        <li><strong>Earthquake prediction:</strong> Monitoring radon in groundwater may signal seismic activity.</li>
+        <li><strong>Environmental hazard:</strong> Second leading cause of lung cancer (after smoking) – accumulates in poorly ventilated buildings from soil.</li>
+        <li><strong>Scientific research:</strong> Tracer for atmospheric studies.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 7. Name note (RSC) -->
+  <div class="element-card">
+    <div class="card-body">
+      <h2 class="section-title">Name</h2>
+      <p class="section-text">
+        From <em>radium</em> because it is produced by radium decay. Originally called “nitron” (Ramsay), but “radon” became IUPAC standard in 1923.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<a href="compare.html" class="compare-button">
+  Compare elements →
+</a>
+
+<footer>
+  <p>Based on Royal Society of Chemistry data. Radon: noble gas, radioactive, heavy, and hazardous.</p>
+</footer>
+
+</body>
+</html>
