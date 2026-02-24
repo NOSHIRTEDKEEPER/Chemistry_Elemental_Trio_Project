@@ -678,23 +678,23 @@
         case 'W': // Tungsten: 6 electrons
           return {
             status: 'WANTS TO LOSE',
-            description: 'Has 6 valence electrons - wants to LOSE 2+ to be stable',
+            description: 'Has 6 valence electrons - wants to LOSE them to have a full shell',
             icon: '↓',
             className: 'wants-less',
             colorClass: 'electron-too-many'
           };
         case 'Si': // Silicon: 4 electrons
           return {
-            status: 'NEEDS TO SHARE',
-            description: 'Has 4 valence electrons - needs 4 MORE to complete shell',
+            status: 'WANTS TO SHARE',
+            description: 'Has 4 valence electrons - wants 4 MORE to complete shell',
             icon: '⇄',
             className: 'needs-more',
             colorClass: 'electron-wants'
           };
         case 'Rn': // Radon: 8 electrons
           return {
-            status: 'ALREADY STABLE',
-            description: 'Has full 8 valence electrons - ALREADY STABLE',
+            status: 'ALREADY FULL',
+            description: 'Has 8 valence electrons - ALREADY FULL',
             icon: '✓',
             className: 'already-full',
             colorClass: 'electron-full'
