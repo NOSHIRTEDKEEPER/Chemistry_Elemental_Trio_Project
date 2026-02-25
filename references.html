@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>References – Tungsten vs Silicon vs Radon</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --accent: #58a6ff;
+      --tungsten: #4a6a8a;
+      --silicon: #7c3aed;
+      --radon: #e11d48;
+      --title-blue-gray: #7a92ad;
+      --tagline-blue-gray: #94a3b8;
+      --border: #30363d;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, sans-serif;
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+    nav {
+      position: fixed;
+      top: 1rem;
+      right: 2rem;
+      z-index: 100;
+      display: flex;
+      gap: 1.5rem;
+    }
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    nav a:hover { color: var(--accent); }
+    header.hero {
+      text-align: center;
+      padding: 7rem 1rem 4.5rem;
+    }
+    h1 {
+      font-size: clamp(2.8rem, 9vw, 4.8rem);
+      margin-bottom: 1rem;
+      color: var(--title-blue-gray);
+      letter-spacing: -0.02em;
+    }
+    .tagline {
+      font-size: 1.3rem;
+      color: var(--tagline-blue-gray);
+      max-width: 760px;
+      margin: 0 auto 3.5rem;
+      line-height: 1.5;
+    }
+    .card-stack {
+      max-width: 920px;
+      margin: 0 auto 4rem;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+    .comparison-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2.2rem;
+      transition: all 0.25s ease;
+    }
+    .comparison-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--accent);
+      box-shadow: 0 14px 36px rgba(0,0,0,0.42);
+    }
+    .card-header {
+      font-size: 2.1rem;
+      margin-bottom: 1.3rem;
+      padding-bottom: 0.9rem;
+      border-bottom: 3px solid;
+      letter-spacing: -0.01em;
+    }
+    .main .card-header { border-bottom-color: var(--accent); color: var(--accent); }
+    .tungsten .card-header { border-bottom-color: var(--tungsten); color: var(--tungsten); }
+    .silicon .card-header { border-bottom-color: var(--silicon); color: var(--silicon); }
+    .radon .card-header { border-bottom-color: var(--radon); color: var(--radon); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.4rem 0;
+      font-size: 1rem;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 1.1rem;
+      text-align: left;
+    }
+    th {
+      background: rgba(88,166,255,0.09);
+      color: var(--accent);
+      font-weight: 600;
+    }
+    a {
+      color: var(--accent);
+    }
+    a:hover { text-decoration: underline; }
+    footer {
+      text-align: center;
+      padding: 5rem 1rem 3rem;
+      color: var(--text-muted);
+      font-size: 0.98rem;
+    }
+    @media (max-width: 800px) {
+      header.hero { padding: 5.5rem 1rem 3.5rem; }
+      nav { top: 1rem; right: 1.2rem; gap: 1.2rem; font-size: 0.97rem; }
+      .card-stack { padding: 0 1rem; gap: 2.5rem; }
+      .card-header { font-size: 1.9rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="tungsten.html">Tungsten</a>
+    <a href="silicon.html">Silicon</a>
+    <a href="radon.html">Radon</a>
+    <a href="compare.html">Compare</a>
+    <a href="references.html">References</a>
+  </nav>
+
+  <header class="hero">
+    <h1>References</h1>
+    <p class="tagline">
+      All data on this site is taken directly from the Royal Society of Chemistry Periodic Table
+    </p>
+  </header>
+
+  <main class="card-stack">
+
+    <div class="comparison-card main">
+      <h2 class="card-header">Main Source (used on every page)</h2>
+      <table>
+        <tr><th>Source</th><th>URL</th></tr>
+        <tr>
+          <td>Royal Society of Chemistry Periodic Table</td>
+          <td><a href="https://periodic-table.rsc.org/" target="_blank">https://periodic-table.rsc.org/</a></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="comparison-card tungsten">
+      <h2 class="card-header">Tungsten</h2>
+      <table>
+        <tr><th>Source</th><th>URL</th></tr>
+        <tr>
+          <td>RSC Tungsten Element Page</td>
+          <td><a href="https://periodic-table.rsc.org/element/74/tungsten" target="_blank">https://periodic-table.rsc.org/element/74/tungsten</a></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="comparison-card silicon">
+      <h2 class="card-header">Silicon</h2>
+      <table>
+        <tr><th>Source</th><th>URL</th></tr>
+        <tr>
+          <td>RSC Silicon Element Page</td>
+          <td><a href="https://periodic-table.rsc.org/element/14/silicon" target="_blank">https://periodic-table.rsc.org/element/14/silicon</a></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="comparison-card radon">
+      <h2 class="card-header">Radon</h2>
+      <table>
+        <tr><th>Source</th><th>URL</th></tr>
+        <tr>
+          <td>RSC Radon Element Page</td>
+          <td><a href="https://periodic-table.rsc.org/element/86/radon" target="_blank">https://periodic-table.rsc.org/element/86/radon</a></td>
+        </tr>
+      </table>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>All content verified against the sources above as of February 2026</p>
+  </footer>
+</body>
+</html>
