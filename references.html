@@ -89,6 +89,7 @@
     .tungsten .card-header { border-bottom-color: var(--tungsten); color: var(--tungsten); }
     .silicon .card-header { border-bottom-color: var(--silicon); color: var(--silicon); }
     .radon .card-header { border-bottom-color: var(--radon); color: var(--radon); }
+    .compare .card-header { border-bottom-color: var(--accent); color: var(--accent); }
     table {
       width: 100%;
       border-collapse: collapse;
@@ -99,6 +100,7 @@
       border: 1px solid var(--border);
       padding: 1.1rem;
       text-align: left;
+      vertical-align: top;
     }
     th {
       background: rgba(88,166,255,0.09);
@@ -143,7 +145,7 @@
   <main class="card-stack">
 
     <div class="comparison-card main">
-      <h2 class="card-header">Main Source (used on every page)</h2>
+      <h2 class="card-header">Main Source</h2>
       <table>
         <tr><th>Source</th><th>URL</th></tr>
         <tr>
@@ -183,6 +185,132 @@
           <td>RSC Radon Element Page</td>
           <td><a href="https://periodic-table.rsc.org/element/86/radon" target="_blank">https://periodic-table.rsc.org/element/86/radon</a></td>
         </tr>
+      </table>
+    </div>
+
+    <div class="comparison-card compare">
+      <h2 class="card-header">Comparison Pages</h2>
+      <p style="margin-bottom: 1.2rem; color: var(--text-muted);">Data used on compare.html, temp-compare.html and bonding-compare.html</p>
+      <table>
+        <tr><th>Element</th><th>RSC Source</th></tr>
+        <tr><td>H (Hydrogen)</td><td><a href="https://periodic-table.rsc.org/element/1/hydrogen" target="_blank">https://periodic-table.rsc.org/element/1/hydrogen</a></td></tr>
+        <tr><td>He (Helium)</td><td><a href="https://periodic-table.rsc.org/element/2/helium" target="_blank">https://periodic-table.rsc.org/element/2/helium</a></td></tr>
+        <tr><td>Li (Lithium)</td><td><a href="https://periodic-table.rsc.org/element/3/lithium" target="_blank">https://periodic-table.rsc.org/element/3/lithium</a></td></tr>
+        <tr><td>Be (Beryllium)</td><td><a href="https://periodic-table.rsc.org/element/4/beryllium" target="_blank">https://periodic-table.rsc.org/element/4/beryllium</a></td></tr>
+        <tr><td>B (Boron)</td><td><a href="https://periodic-table.rsc.org/element/5/boron" target="_blank">https://periodic-table.rsc.org/element/5/boron</a></td></tr>
+        <tr><td>C (Carbon)</td><td><a href="https://periodic-table.rsc.org/element/6/carbon" target="_blank">https://periodic-table.rsc.org/element/6/carbon</a></td></tr>
+        <tr><td>N (Nitrogen)</td><td><a href="https://periodic-table.rsc.org/element/7/nitrogen" target="_blank">https://periodic-table.rsc.org/element/7/nitrogen</a></td></tr>
+        <tr><td>O (Oxygen)</td><td><a href="https://periodic-table.rsc.org/element/8/oxygen" target="_blank">https://periodic-table.rsc.org/element/8/oxygen</a></td></tr>
+        <tr><td>F (Fluorine)</td><td><a href="https://periodic-table.rsc.org/element/9/fluorine" target="_blank">https://periodic-table.rsc.org/element/9/fluorine</a></td></tr>
+        <tr><td>Ne (Neon)</td><td><a href="https://periodic-table.rsc.org/element/10/neon" target="_blank">https://periodic-table.rsc.org/element/10/neon</a></td></tr>
+        <tr><td>Na (Sodium)</td><td><a href="https://periodic-table.rsc.org/element/11/sodium" target="_blank">https://periodic-table.rsc.org/element/11/sodium</a></td></tr>
+        <tr><td>Mg (Magnesium)</td><td><a href="https://periodic-table.rsc.org/element/12/magnesium" target="_blank">https://periodic-table.rsc.org/element/12/magnesium</a></td></tr>
+        <tr><td>Al (Aluminium)</td><td><a href="https://periodic-table.rsc.org/element/13/aluminium" target="_blank">https://periodic-table.rsc.org/element/13/aluminium</a></td></tr>
+        <tr><td>Si (Silicon)</td><td><a href="https://periodic-table.rsc.org/element/14/silicon" target="_blank">https://periodic-table.rsc.org/element/14/silicon</a></td></tr>
+        <tr><td>P (Phosphorus)</td><td><a href="https://periodic-table.rsc.org/element/15/phosphorus" target="_blank">https://periodic-table.rsc.org/element/15/phosphorus</a></td></tr>
+        <tr><td>S (Sulfur)</td><td><a href="https://periodic-table.rsc.org/element/16/sulfur" target="_blank">https://periodic-table.rsc.org/element/16/sulfur</a></td></tr>
+        <tr><td>Cl (Chlorine)</td><td><a href="https://periodic-table.rsc.org/element/17/chlorine" target="_blank">https://periodic-table.rsc.org/element/17/chlorine</a></td></tr>
+        <tr><td>Ar (Argon)</td><td><a href="https://periodic-table.rsc.org/element/18/argon" target="_blank">https://periodic-table.rsc.org/element/18/argon</a></td></tr>
+        <tr><td>K (Potassium)</td><td><a href="https://periodic-table.rsc.org/element/19/potassium" target="_blank">https://periodic-table.rsc.org/element/19/potassium</a></td></tr>
+        <tr><td>Ca (Calcium)</td><td><a href="https://periodic-table.rsc.org/element/20/calcium" target="_blank">https://periodic-table.rsc.org/element/20/calcium</a></td></tr>
+        <tr><td>Sc (Scandium)</td><td><a href="https://periodic-table.rsc.org/element/21/scandium" target="_blank">https://periodic-table.rsc.org/element/21/scandium</a></td></tr>
+        <tr><td>Ti (Titanium)</td><td><a href="https://periodic-table.rsc.org/element/22/titanium" target="_blank">https://periodic-table.rsc.org/element/22/titanium</a></td></tr>
+        <tr><td>V (Vanadium)</td><td><a href="https://periodic-table.rsc.org/element/23/vanadium" target="_blank">https://periodic-table.rsc.org/element/23/vanadium</a></td></tr>
+        <tr><td>Cr (Chromium)</td><td><a href="https://periodic-table.rsc.org/element/24/chromium" target="_blank">https://periodic-table.rsc.org/element/24/chromium</a></td></tr>
+        <tr><td>Mn (Manganese)</td><td><a href="https://periodic-table.rsc.org/element/25/manganese" target="_blank">https://periodic-table.rsc.org/element/25/manganese</a></td></tr>
+        <tr><td>Fe (Iron)</td><td><a href="https://periodic-table.rsc.org/element/26/iron" target="_blank">https://periodic-table.rsc.org/element/26/iron</a></td></tr>
+        <tr><td>Co (Cobalt)</td><td><a href="https://periodic-table.rsc.org/element/27/cobalt" target="_blank">https://periodic-table.rsc.org/element/27/cobalt</a></td></tr>
+        <tr><td>Ni (Nickel)</td><td><a href="https://periodic-table.rsc.org/element/28/nickel" target="_blank">https://periodic-table.rsc.org/element/28/nickel</a></td></tr>
+        <tr><td>Cu (Copper)</td><td><a href="https://periodic-table.rsc.org/element/29/copper" target="_blank">https://periodic-table.rsc.org/element/29/copper</a></td></tr>
+        <tr><td>Zn (Zinc)</td><td><a href="https://periodic-table.rsc.org/element/30/zinc" target="_blank">https://periodic-table.rsc.org/element/30/zinc</a></td></tr>
+        <tr><td>Ga (Gallium)</td><td><a href="https://periodic-table.rsc.org/element/31/gallium" target="_blank">https://periodic-table.rsc.org/element/31/gallium</a></td></tr>
+        <tr><td>Ge (Germanium)</td><td><a href="https://periodic-table.rsc.org/element/32/germanium" target="_blank">https://periodic-table.rsc.org/element/32/germanium</a></td></tr>
+        <tr><td>As (Arsenic)</td><td><a href="https://periodic-table.rsc.org/element/33/arsenic" target="_blank">https://periodic-table.rsc.org/element/33/arsenic</a></td></tr>
+        <tr><td>Se (Selenium)</td><td><a href="https://periodic-table.rsc.org/element/34/selenium" target="_blank">https://periodic-table.rsc.org/element/34/selenium</a></td></tr>
+        <tr><td>Br (Bromine)</td><td><a href="https://periodic-table.rsc.org/element/35/bromine" target="_blank">https://periodic-table.rsc.org/element/35/bromine</a></td></tr>
+        <tr><td>Kr (Krypton)</td><td><a href="https://periodic-table.rsc.org/element/36/krypton" target="_blank">https://periodic-table.rsc.org/element/36/krypton</a></td></tr>
+        <tr><td>Rb (Rubidium)</td><td><a href="https://periodic-table.rsc.org/element/37/rubidium" target="_blank">https://periodic-table.rsc.org/element/37/rubidium</a></td></tr>
+        <tr><td>Sr (Strontium)</td><td><a href="https://periodic-table.rsc.org/element/38/strontium" target="_blank">https://periodic-table.rsc.org/element/38/strontium</a></td></tr>
+        <tr><td>Y (Yttrium)</td><td><a href="https://periodic-table.rsc.org/element/39/yttrium" target="_blank">https://periodic-table.rsc.org/element/39/yttrium</a></td></tr>
+        <tr><td>Zr (Zirconium)</td><td><a href="https://periodic-table.rsc.org/element/40/zirconium" target="_blank">https://periodic-table.rsc.org/element/40/zirconium</a></td></tr>
+        <tr><td>Nb (Niobium)</td><td><a href="https://periodic-table.rsc.org/element/41/niobium" target="_blank">https://periodic-table.rsc.org/element/41/niobium</a></td></tr>
+        <tr><td>Mo (Molybdenum)</td><td><a href="https://periodic-table.rsc.org/element/42/molybdenum" target="_blank">https://periodic-table.rsc.org/element/42/molybdenum</a></td></tr>
+        <tr><td>Tc (Technetium)</td><td><a href="https://periodic-table.rsc.org/element/43/technetium" target="_blank">https://periodic-table.rsc.org/element/43/technetium</a></td></tr>
+        <tr><td>Ru (Ruthenium)</td><td><a href="https://periodic-table.rsc.org/element/44/ruthenium" target="_blank">https://periodic-table.rsc.org/element/44/ruthenium</a></td></tr>
+        <tr><td>Rh (Rhodium)</td><td><a href="https://periodic-table.rsc.org/element/45/rhodium" target="_blank">https://periodic-table.rsc.org/element/45/rhodium</a></td></tr>
+        <tr><td>Pd (Palladium)</td><td><a href="https://periodic-table.rsc.org/element/46/palladium" target="_blank">https://periodic-table.rsc.org/element/46/palladium</a></td></tr>
+        <tr><td>Ag (Silver)</td><td><a href="https://periodic-table.rsc.org/element/47/silver" target="_blank">https://periodic-table.rsc.org/element/47/silver</a></td></tr>
+        <tr><td>Cd (Cadmium)</td><td><a href="https://periodic-table.rsc.org/element/48/cadmium" target="_blank">https://periodic-table.rsc.org/element/48/cadmium</a></td></tr>
+        <tr><td>In (Indium)</td><td><a href="https://periodic-table.rsc.org/element/49/indium" target="_blank">https://periodic-table.rsc.org/element/49/indium</a></td></tr>
+        <tr><td>Sn (Tin)</td><td><a href="https://periodic-table.rsc.org/element/50/tin" target="_blank">https://periodic-table.rsc.org/element/50/tin</a></td></tr>
+        <tr><td>Sb (Antimony)</td><td><a href="https://periodic-table.rsc.org/element/51/antimony" target="_blank">https://periodic-table.rsc.org/element/51/antimony</a></td></tr>
+        <tr><td>Te (Tellurium)</td><td><a href="https://periodic-table.rsc.org/element/52/tellurium" target="_blank">https://periodic-table.rsc.org/element/52/tellurium</a></td></tr>
+        <tr><td>I (Iodine)</td><td><a href="https://periodic-table.rsc.org/element/53/iodine" target="_blank">https://periodic-table.rsc.org/element/53/iodine</a></td></tr>
+        <tr><td>Xe (Xenon)</td><td><a href="https://periodic-table.rsc.org/element/54/xenon" target="_blank">https://periodic-table.rsc.org/element/54/xenon</a></td></tr>
+        <tr><td>Cs (Caesium)</td><td><a href="https://periodic-table.rsc.org/element/55/caesium" target="_blank">https://periodic-table.rsc.org/element/55/caesium</a></td></tr>
+        <tr><td>Ba (Barium)</td><td><a href="https://periodic-table.rsc.org/element/56/barium" target="_blank">https://periodic-table.rsc.org/element/56/barium</a></td></tr>
+        <tr><td>La (Lanthanum)</td><td><a href="https://periodic-table.rsc.org/element/57/lanthanum" target="_blank">https://periodic-table.rsc.org/element/57/lanthanum</a></td></tr>
+        <tr><td>Ce (Cerium)</td><td><a href="https://periodic-table.rsc.org/element/58/cerium" target="_blank">https://periodic-table.rsc.org/element/58/cerium</a></td></tr>
+        <tr><td>Pr (Praseodymium)</td><td><a href="https://periodic-table.rsc.org/element/59/praseodymium" target="_blank">https://periodic-table.rsc.org/element/59/praseodymium</a></td></tr>
+        <tr><td>Nd (Neodymium)</td><td><a href="https://periodic-table.rsc.org/element/60/neodymium" target="_blank">https://periodic-table.rsc.org/element/60/neodymium</a></td></tr>
+        <tr><td>Pm (Promethium)</td><td><a href="https://periodic-table.rsc.org/element/61/promethium" target="_blank">https://periodic-table.rsc.org/element/61/promethium</a></td></tr>
+        <tr><td>Sm (Samarium)</td><td><a href="https://periodic-table.rsc.org/element/62/samarium" target="_blank">https://periodic-table.rsc.org/element/62/samarium</a></td></tr>
+        <tr><td>Eu (Europium)</td><td><a href="https://periodic-table.rsc.org/element/63/europium" target="_blank">https://periodic-table.rsc.org/element/63/europium</a></td></tr>
+        <tr><td>Gd (Gadolinium)</td><td><a href="https://periodic-table.rsc.org/element/64/gadolinium" target="_blank">https://periodic-table.rsc.org/element/64/gadolinium</a></td></tr>
+        <tr><td>Tb (Terbium)</td><td><a href="https://periodic-table.rsc.org/element/65/terbium" target="_blank">https://periodic-table.rsc.org/element/65/terbium</a></td></tr>
+        <tr><td>Dy (Dysprosium)</td><td><a href="https://periodic-table.rsc.org/element/66/dysprosium" target="_blank">https://periodic-table.rsc.org/element/66/dysprosium</a></td></tr>
+        <tr><td>Ho (Holmium)</td><td><a href="https://periodic-table.rsc.org/element/67/holmium" target="_blank">https://periodic-table.rsc.org/element/67/holmium</a></td></tr>
+        <tr><td>Er (Erbium)</td><td><a href="https://periodic-table.rsc.org/element/68/erbium" target="_blank">https://periodic-table.rsc.org/element/68/erbium</a></td></tr>
+        <tr><td>Tm (Thulium)</td><td><a href="https://periodic-table.rsc.org/element/69/thulium" target="_blank">https://periodic-table.rsc.org/element/69/thulium</a></td></tr>
+        <tr><td>Yb (Ytterbium)</td><td><a href="https://periodic-table.rsc.org/element/70/ytterbium" target="_blank">https://periodic-table.rsc.org/element/70/ytterbium</a></td></tr>
+        <tr><td>Lu (Lutetium)</td><td><a href="https://periodic-table.rsc.org/element/71/lutetium" target="_blank">https://periodic-table.rsc.org/element/71/lutetium</a></td></tr>
+        <tr><td>Hf (Hafnium)</td><td><a href="https://periodic-table.rsc.org/element/72/hafnium" target="_blank">https://periodic-table.rsc.org/element/72/hafnium</a></td></tr>
+        <tr><td>Ta (Tantalum)</td><td><a href="https://periodic-table.rsc.org/element/73/tantalum" target="_blank">https://periodic-table.rsc.org/element/73/tantalum</a></td></tr>
+        <tr><td>W (Tungsten)</td><td><a href="https://periodic-table.rsc.org/element/74/tungsten" target="_blank">https://periodic-table.rsc.org/element/74/tungsten</a></td></tr>
+        <tr><td>Re (Rhenium)</td><td><a href="https://periodic-table.rsc.org/element/75/rhenium" target="_blank">https://periodic-table.rsc.org/element/75/rhenium</a></td></tr>
+        <tr><td>Os (Osmium)</td><td><a href="https://periodic-table.rsc.org/element/76/osmium" target="_blank">https://periodic-table.rsc.org/element/76/osmium</a></td></tr>
+        <tr><td>Ir (Iridium)</td><td><a href="https://periodic-table.rsc.org/element/77/iridium" target="_blank">https://periodic-table.rsc.org/element/77/iridium</a></td></tr>
+        <tr><td>Pt (Platinum)</td><td><a href="https://periodic-table.rsc.org/element/78/platinum" target="_blank">https://periodic-table.rsc.org/element/78/platinum</a></td></tr>
+        <tr><td>Au (Gold)</td><td><a href="https://periodic-table.rsc.org/element/79/gold" target="_blank">https://periodic-table.rsc.org/element/79/gold</a></td></tr>
+        <tr><td>Hg (Mercury)</td><td><a href="https://periodic-table.rsc.org/element/80/mercury" target="_blank">https://periodic-table.rsc.org/element/80/mercury</a></td></tr>
+        <tr><td>Tl (Thallium)</td><td><a href="https://periodic-table.rsc.org/element/81/thallium" target="_blank">https://periodic-table.rsc.org/element/81/thallium</a></td></tr>
+        <tr><td>Pb (Lead)</td><td><a href="https://periodic-table.rsc.org/element/82/lead" target="_blank">https://periodic-table.rsc.org/element/82/lead</a></td></tr>
+        <tr><td>Bi (Bismuth)</td><td><a href="https://periodic-table.rsc.org/element/83/bismuth" target="_blank">https://periodic-table.rsc.org/element/83/bismuth</a></td></tr>
+        <tr><td>Po (Polonium)</td><td><a href="https://periodic-table.rsc.org/element/84/polonium" target="_blank">https://periodic-table.rsc.org/element/84/polonium</a></td></tr>
+        <tr><td>At (Astatine)</td><td><a href="https://periodic-table.rsc.org/element/85/astatine" target="_blank">https://periodic-table.rsc.org/element/85/astatine</a></td></tr>
+        <tr><td>Rn (Radon)</td><td><a href="https://periodic-table.rsc.org/element/86/radon" target="_blank">https://periodic-table.rsc.org/element/86/radon</a></td></tr>
+        <tr><td>Fr (Francium)</td><td><a href="https://periodic-table.rsc.org/element/87/francium" target="_blank">https://periodic-table.rsc.org/element/87/francium</a></td></tr>
+        <tr><td>Ra (Radium)</td><td><a href="https://periodic-table.rsc.org/element/88/radium" target="_blank">https://periodic-table.rsc.org/element/88/radium</a></td></tr>
+        <tr><td>Ac (Actinium)</td><td><a href="https://periodic-table.rsc.org/element/89/actinium" target="_blank">https://periodic-table.rsc.org/element/89/actinium</a></td></tr>
+        <tr><td>Th (Thorium)</td><td><a href="https://periodic-table.rsc.org/element/90/thorium" target="_blank">https://periodic-table.rsc.org/element/90/thorium</a></td></tr>
+        <tr><td>Pa (Protactinium)</td><td><a href="https://periodic-table.rsc.org/element/91/protactinium" target="_blank">https://periodic-table.rsc.org/element/91/protactinium</a></td></tr>
+        <tr><td>U (Uranium)</td><td><a href="https://periodic-table.rsc.org/element/92/uranium" target="_blank">https://periodic-table.rsc.org/element/92/uranium</a></td></tr>
+        <tr><td>Np (Neptunium)</td><td><a href="https://periodic-table.rsc.org/element/93/neptunium" target="_blank">https://periodic-table.rsc.org/element/93/neptunium</a></td></tr>
+        <tr><td>Pu (Plutonium)</td><td><a href="https://periodic-table.rsc.org/element/94/plutonium" target="_blank">https://periodic-table.rsc.org/element/94/plutonium</a></td></tr>
+        <tr><td>Am (Americium)</td><td><a href="https://periodic-table.rsc.org/element/95/americium" target="_blank">https://periodic-table.rsc.org/element/95/americium</a></td></tr>
+        <tr><td>Cm (Curium)</td><td><a href="https://periodic-table.rsc.org/element/96/curium" target="_blank">https://periodic-table.rsc.org/element/96/curium</a></td></tr>
+        <tr><td>Bk (Berkelium)</td><td><a href="https://periodic-table.rsc.org/element/97/berkelium" target="_blank">https://periodic-table.rsc.org/element/97/berkelium</a></td></tr>
+        <tr><td>Cf (Californium)</td><td><a href="https://periodic-table.rsc.org/element/98/californium" target="_blank">https://periodic-table.rsc.org/element/98/californium</a></td></tr>
+        <tr><td>Es (Einsteinium)</td><td><a href="https://periodic-table.rsc.org/element/99/einsteinium" target="_blank">https://periodic-table.rsc.org/element/99/einsteinium</a></td></tr>
+        <tr><td>Fm (Fermium)</td><td><a href="https://periodic-table.rsc.org/element/100/fermium" target="_blank">https://periodic-table.rsc.org/element/100/fermium</a></td></tr>
+        <tr><td>Md (Mendelevium)</td><td><a href="https://periodic-table.rsc.org/element/101/mendelevium" target="_blank">https://periodic-table.rsc.org/element/101/mendelevium</a></td></tr>
+        <tr><td>No (Nobelium)</td><td><a href="https://periodic-table.rsc.org/element/102/nobelium" target="_blank">https://periodic-table.rsc.org/element/102/nobelium</a></td></tr>
+        <tr><td>Lr (Lawrencium)</td><td><a href="https://periodic-table.rsc.org/element/103/lawrencium" target="_blank">https://periodic-table.rsc.org/element/103/lawrencium</a></td></tr>
+        <tr><td>Rf (Rutherfordium)</td><td><a href="https://periodic-table.rsc.org/element/104/rutherfordium" target="_blank">https://periodic-table.rsc.org/element/104/rutherfordium</a></td></tr>
+        <tr><td>Db (Dubnium)</td><td><a href="https://periodic-table.rsc.org/element/105/dubnium" target="_blank">https://periodic-table.rsc.org/element/105/dubnium</a></td></tr>
+        <tr><td>Sg (Seaborgium)</td><td><a href="https://periodic-table.rsc.org/element/106/seaborgium" target="_blank">https://periodic-table.rsc.org/element/106/seaborgium</a></td></tr>
+        <tr><td>Bh (Bohrium)</td><td><a href="https://periodic-table.rsc.org/element/107/bohrium" target="_blank">https://periodic-table.rsc.org/element/107/bohrium</a></td></tr>
+        <tr><td>Hs (Hassium)</td><td><a href="https://periodic-table.rsc.org/element/108/hassium" target="_blank">https://periodic-table.rsc.org/element/108/hassium</a></td></tr>
+        <tr><td>Mt (Meitnerium)</td><td><a href="https://periodic-table.rsc.org/element/109/meitnerium" target="_blank">https://periodic-table.rsc.org/element/109/meitnerium</a></td></tr>
+        <tr><td>Ds (Darmstadtium)</td><td><a href="https://periodic-table.rsc.org/element/110/darmstadtium" target="_blank">https://periodic-table.rsc.org/element/110/darmstadtium</a></td></tr>
+        <tr><td>Rg (Roentgenium)</td><td><a href="https://periodic-table.rsc.org/element/111/roentgenium" target="_blank">https://periodic-table.rsc.org/element/111/roentgenium</a></td></tr>
+        <tr><td>Cn (Copernicium)</td><td><a href="https://periodic-table.rsc.org/element/112/copernicium" target="_blank">https://periodic-table.rsc.org/element/112/copernicium</a></td></tr>
+        <tr><td>Nh (Nihonium)</td><td><a href="https://periodic-table.rsc.org/element/113/nihonium" target="_blank">https://periodic-table.rsc.org/element/113/nihonium</a></td></tr>
+        <tr><td>Fl (Flerovium)</td><td><a href="https://periodic-table.rsc.org/element/114/flerovium" target="_blank">https://periodic-table.rsc.org/element/114/flerovium</a></td></tr>
+        <tr><td>Mc (Moscovium)</td><td><a href="https://periodic-table.rsc.org/element/115/moscovium" target="_blank">https://periodic-table.rsc.org/element/115/moscovium</a></td></tr>
+        <tr><td>Lv (Livermorium)</td><td><a href="https://periodic-table.rsc.org/element/116/livermorium" target="_blank">https://periodic-table.rsc.org/element/116/livermorium</a></td></tr>
+        <tr><td>Ts (Tennessine)</td><td><a href="https://periodic-table.rsc.org/element/117/tennessine" target="_blank">https://periodic-table.rsc.org/element/117/tennessine</a></td></tr>
+        <tr><td>Og (Oganesson)</td><td><a href="https://periodic-table.rsc.org/element/118/oganesson" target="_blank">https://periodic-table.rsc.org/element/118/oganesson</a></td></tr>
       </table>
     </div>
 
